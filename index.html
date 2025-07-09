@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- WhatsApp link preview meta tags -->
-<meta property="og:title" content="buat nirmala ♡" />
-<meta property="og:description" content="dari boye0509 buat nirmala" />
-<meta property="og:image" content="https://i.ibb.co/MRk4CGR/heart-pink.jpg" />
-<meta property="og:url" content="https://boye0509.github.io/kalkulator-nirmala/" />
-<meta name="twitter:card" content="summary_large_image" />
+  <!-- Link preview meta tags -->
+  <meta property="og:title" content="buat Nirmala ♡" />
+  <meta property="og:description" content="Kalkulator cinta dari Boye buat Nirmala 💗" />
+  <meta property="og:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
+  <meta property="og:url" content="https://boye0509.github.io/kalkulator-nirmala/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="buat Nirmala ♡" />
+  <meta name="twitter:description" content="Kalkulator cinta dari Boye buat Nirmala 💗" />
+  <meta name="twitter:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>buat Nirmala ♡</title>
   <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png" />
-
-  <!-- META UNTUK LINK PREVIEW -->
-  <meta property="og:title" content="buat nirmala" />
-  <meta property="og:description" content="Kalkulator cinta khusus buat Nirmala 💗" />
-  <meta property="og:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
-  <meta property="og:url" content="https://boye0509.github.io/kalkulator-nirmala/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="buat nirmala" />
-  <meta name="twitter:description" content="Kalkulator cinta khusus buat Nirmala 💗" />
-  <meta name="twitter:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
 
   <style>
     body {
@@ -39,7 +32,7 @@
     .love {
       position: fixed;
       top: -30px;
-      font-size: 40px;
+      font-size: 48px;
       color: red;
       animation: fall 6s linear infinite;
       pointer-events: none;
@@ -104,7 +97,7 @@
 </head>
 <body>
   <audio id="bgm" loop>
-    <source src="./about_you.mp3" type="audio/mpeg" />
+    <source src="about_you.mp3" type="audio/mpeg" />
   </audio>
 
   <div class="calculator">
@@ -135,7 +128,6 @@
   <script>
     let screenValue = '0';
     let audioPlayed = false;
-    let heartInterval;
 
     function updateScreen() {
       document.getElementById('screen').innerText = screenValue;
@@ -144,7 +136,7 @@
     function appendToScreen(value) {
       if (!audioPlayed) {
         const audio = document.getElementById('bgm');
-        audio.volume = 0.2;
+        audio.volume = 0.3;
         audio.play().catch(() => {});
         audioPlayed = true;
       }
@@ -165,16 +157,15 @@
     function calculate() {
       screenValue = 'SEMANGAT MED Kiw Kiw♡';
       updateScreen();
-      dropHeartsForDuration(155000); // sekitar 2 menit 35 detik
+      dropHeartsForDuration(155000); // 2 menit 35 detik
     }
 
     function dropHeartsForDuration(duration) {
       const start = Date.now();
-
-      heartInterval = setInterval(() => {
+      const interval = setInterval(() => {
         const now = Date.now();
         if (now - start > duration) {
-          clearInterval(heartInterval);
+          clearInterval(interval);
           return;
         }
 
@@ -185,7 +176,7 @@
         heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 6000);
-      }, 250);
+      }, 200);
     }
   </script>
 </body>
