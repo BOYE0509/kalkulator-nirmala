@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Link preview meta tags -->
-  <meta property="og:title" content="buat Nirmala ♡" />
-  <meta property="og:description" content="Kalkulator spesial buat Nirmala 💗" />
-  <meta property="og:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
-  <meta property="og:url" content="https://boye0509.github.io/kalkulator-nirmala/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="buat Nirmala ♡" />
-  <meta name="twitter:description" content="Kalkulator spesial buat Nirmala 💗" />
-  <meta name="twitter:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
-
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>buat Nirmala ♡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Malam Sabrina ♡</title>
   <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png" />
+
+  <!-- WhatsApp & social preview -->
+  <meta property="og:title" content="Selamat Malam Sabrina ♡" />
+  <meta property="og:description" content="Pesan manis sebelum tidur untuk Sabrina 💤" />
+  <meta property="og:image" content="https://i.ibb.co/MRk4CGR/heart-pink.jpg" />
+  <meta property="og:url" content="https://boye0509.github.io/selamat-malam-sabrina/" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <style>
     body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #1e1e2f, #3a3a5c);
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(to bottom, #ffe6f0, #ffb3d1);
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
       overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-top: 10px;
     }
 
     .love {
       position: fixed;
       top: -30px;
-      font-size: 48px;
-      color: red;
-      animation: fall 6s linear infinite;
+      font-size: 40px;
+      color: #ff6699;
+      animation: fall 8s linear infinite;
       pointer-events: none;
     }
 
@@ -44,140 +52,43 @@
         opacity: 1;
       }
       100% {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(100vh) rotate(720deg);
         opacity: 0;
       }
-    }
-
-    .calculator {
-      background-color: #000;
-      border-radius: 40px;
-      padding: 20px;
-      width: 300px;
-      z-index: 1;
-    }
-
-    .screen {
-      background-color: #333;
-      color: #fff;
-      font-size: 35px;
-      text-align: right;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      min-height: 50px;
-    }
-
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    button {
-      background-color: #333;
-      color: #fff;
-      border: none;
-      font-size: 24px;
-      padding: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-    }
-
-    button:hover {
-      background-color: #555;
-    }
-
-    button.operator,
-    button.equal {
-      background-color: #ff4d88;
     }
   </style>
 </head>
 <body>
-  <audio id="bgm" loop>
-    <source src="about_you.mp3" type="audio/mpeg" />
+  <audio id="bgm" autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
   </audio>
 
-  <div class="calculator">
-    <div class="screen" id="screen">0</div>
-    <div class="buttons">
-      <button onclick="clearScreen()">C</button>
-      <button onclick="appendToScreen('+/-')">+/-</button>
-      <button onclick="appendToScreen('%')">%</button>
-      <button class="operator" onclick="appendToScreen('/')">/</button>
-      <button onclick="appendToScreen('7')">7</button>
-      <button onclick="appendToScreen('8')">8</button>
-      <button onclick="appendToScreen('9')">9</button>
-      <button class="operator" onclick="appendToScreen('*')">×</button>
-      <button onclick="appendToScreen('4')">4</button>
-      <button onclick="appendToScreen('5')">5</button>
-      <button onclick="appendToScreen('6')">6</button>
-      <button class="operator" onclick="appendToScreen('-')">-</button>
-      <button onclick="appendToScreen('1')">1</button>
-      <button onclick="appendToScreen('2')">2</button>
-      <button onclick="appendToScreen('3')">3</button>
-      <button class="operator" onclick="appendToScreen('+')">+</button>
-      <button onclick="appendToScreen('0')">0</button>
-      <button onclick="appendToScreen('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
-    </div>
+  <div>
+    <h1>Selamat Malam, Sabrina ♡</h1>
+    <p>Istirahat yang nyenyak yaa, semoga mimpi indah dan tenang...</p>
+    <p>Ada aku yang selalu doain kamu dari jauh 🤍</p>
   </div>
 
   <script>
-    let screenValue = '0';
-    let audioPlayed = false;
+    const duration = 180000; // 3 menit (durasi lagu)
+    const start = Date.now();
 
-    function updateScreen() {
-      document.getElementById('screen').innerText = screenValue;
-    }
-
-    function appendToScreen(value) {
-      if (!audioPlayed) {
-        const audio = document.getElementById('bgm');
-        audio.volume = 0.3;
-        audio.play().catch(() => {});
-        audioPlayed = true;
+    const dropHearts = setInterval(() => {
+      const now = Date.now();
+      if (now - start > duration) {
+        clearInterval(dropHearts);
+        return;
       }
 
-      if (screenValue === '0' && value !== '.') {
-        screenValue = value;
-      } else {
-        screenValue += value;
-      }
-      updateScreen();
-    }
-
-    function clearScreen() {
-      screenValue = '0';
-      updateScreen();
-    }
-
-    function calculate() {
-      screenValue = 'SEMANGAT MED Kiw Kiw♡';
-      updateScreen();
-      dropHeartsForDuration(155000);
-    }
-
-    function dropHeartsForDuration(duration) {
-      const start = Date.now();
-      const interval = setInterval(() => {
-        const now = Date.now();
-        if (now - start > duration) {
-          clearInterval(interval);
-          return;
-        }
-
-        const heart = document.createElement('div');
-        heart.classList.add('love');
-        heart.innerText = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-      }, 200);
-    }
+      const heart = document.createElement('div');
+      heart.classList.add('love');
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 40 + 'px';
+      heart.style.animationDuration = (Math.random() * 2 + 5) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 250);
   </script>
 </body>
 </html>
