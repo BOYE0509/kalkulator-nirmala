@@ -6,11 +6,11 @@
   <title>Selamat Malam Sabrina ♡</title>
   <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png" />
 
-  <!-- Preview saat dibagikan ke WA atau medsos -->
+  <!-- Meta preview buat WA/medsos -->
   <meta property="og:title" content="Selamat Malam Sabrina ♡" />
   <meta property="og:description" content="Pesan manis sebelum tidur buat Sabrina 💗" />
   <meta property="og:image" content="https://i.ibb.co/MRk4CGR/heart-pink.jpg" />
-  <meta property="og:url" content="https://boye0509.github.io/selamat-malam-sabrina/" />
+  <meta property="og:url" content="https://dafjoyy.github.io/selamat-malam-untuk-sabrina/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -60,8 +60,8 @@
   </style>
 </head>
 <body>
-  <audio id="bgm" autoplay loop>
-    <source src="./about_you.mp3" type="audio/mpeg" />
+  <audio id="bgm" loop>
+    <source src="about_you.mp3" type="audio/mpeg" />
   </audio>
 
   <div>
@@ -71,7 +71,8 @@
   </div>
 
   <script>
-    const duration = 180000; // 3 menit (180000ms)
+    // Efek hati jatuh
+    const duration = 180000; // 3 menit
     const start = Date.now();
 
     const dropHearts = setInterval(() => {
@@ -90,6 +91,17 @@
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 8000);
     }, 250);
+
+    // Sound fix - Play on first click
+    let audioPlayed = false;
+    document.body.addEventListener("click", function () {
+      if (!audioPlayed) {
+        const audio = document.getElementById("bgm");
+        audio.volume = 0.3;
+        audio.play().catch(() => {});
+        audioPlayed = true;
+      }
+    });
   </script>
 </body>
 </html>
