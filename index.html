@@ -6,6 +6,26 @@
   <title>buat Nirmala ♡</title>
   <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png" />
   <style>
+    .love {
+  position: fixed;
+  top: -30px;
+  font-size: 24px;
+  color: red;
+  animation: fall 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
     body {
       display: flex;
       justify-content: center;
@@ -121,5 +141,17 @@
       updateScreen();
     }
   </script>
+  <script>
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('love');
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+</script>
+
 </body>
 </html>
