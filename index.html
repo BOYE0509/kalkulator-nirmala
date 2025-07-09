@@ -6,27 +6,47 @@
   <title>buat Nirmala ♡</title>
   <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png" />
 
-  <!-- OG meta for link preview -->
-  <meta property="og:title" content="buat Nirmala ♡" />
-  <meta property="og:description" content="Kalkulator spesial berisi pesan rahasia + lagu buat kamu 💖" />
-  <meta property="og:image" content="https://i.ibb.co/hXZsYxZ/heart.png" />
-  <meta property="og:url" content="https://boye0509.github.io/Ni-Ketut-Nirmala-Sari/" />
+  <!-- META UNTUK LINK PREVIEW -->
+  <meta property="og:title" content="buat nirmala" />
+  <meta property="og:description" content="Kalkulator cinta khusus buat Nirmala 💗" />
+  <meta property="og:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
+  <meta property="og:url" content="https://boye0509.github.io/kalkulator-nirmala/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="buat Nirmala ♡" />
-  <meta name="twitter:description" content="Kalkulator spesial berisi pesan rahasia + lagu buat kamu 💖" />
-  <meta name="twitter:image" content="https://i.ibb.co/hXZsYxZ/heart.png" />
+  <meta name="twitter:title" content="buat nirmala" />
+  <meta name="twitter:description" content="Kalkulator cinta khusus buat Nirmala 💗" />
+  <meta name="twitter:image" content="https://i.ibb.co/Yyd5kcM/pink-heart-preview.png" />
 
   <style>
     body {
-      margin: 0;
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom, #ffe6f0, #ffb3d1);
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #fbd3e9 0%, #bb377d 100%);
       overflow: hidden;
+    }
+
+    .love {
+      position: fixed;
+      top: -30px;
+      font-size: 40px;
+      color: red;
+      animation: fall 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .calculator {
@@ -35,7 +55,6 @@
       padding: 20px;
       width: 300px;
       z-index: 1;
-      position: relative;
     }
 
     .screen {
@@ -63,47 +82,22 @@
       padding: 20px;
       border-radius: 50%;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.2s ease-in-out;
     }
 
     button:hover {
       background-color: #555;
     }
 
-    button.operator {
-      background-color: #ff9500;
-    }
-
+    button.operator,
     button.equal {
-      background-color: #ff9500;
-    }
-
-    .love {
-      position: fixed;
-      top: -50px;
-      font-size: 48px;
-      color: red;
-      animation: fall linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-      }
+      background-color: #ff4d88;
     }
   </style>
 </head>
 <body>
-
   <audio id="bgm" loop>
-    <source src="about_you.mp3" type="audio/mpeg" />
+    <source src="./about_you.mp3" type="audio/mpeg" />
   </audio>
 
   <div class="calculator">
@@ -134,6 +128,7 @@
   <script>
     let screenValue = '0';
     let audioPlayed = false;
+    let heartInterval;
 
     function updateScreen() {
       document.getElementById('screen').innerText = screenValue;
@@ -145,7 +140,6 @@
         audio.volume = 0.2;
         audio.play().catch(() => {});
         audioPlayed = true;
-        dropHearts(audio.duration * 1000); // trigger hearts based on audio length
       }
 
       if (screenValue === '0' && value !== '.') {
@@ -164,22 +158,28 @@
     function calculate() {
       screenValue = 'SEMANGAT MED Kiw Kiw♡';
       updateScreen();
+      dropHeartsForDuration(155000); // sekitar 2 menit 35 detik
     }
 
-    function dropHearts(duration) {
-      const interval = setInterval(() => {
+    function dropHeartsForDuration(duration) {
+      const start = Date.now();
+
+      heartInterval = setInterval(() => {
+        const now = Date.now();
+        if (now - start > duration) {
+          clearInterval(heartInterval);
+          return;
+        }
+
         const heart = document.createElement('div');
         heart.classList.add('love');
         heart.innerText = '❤️';
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 7000);
+        setTimeout(() => heart.remove(), 6000);
       }, 250);
-
-      setTimeout(() => clearInterval(interval), duration || 180000); // 3 minutes fallback
     }
   </script>
-
 </body>
 </html>
