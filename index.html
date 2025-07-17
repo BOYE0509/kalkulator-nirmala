@@ -1,103 +1,143 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selamat Pagi ALYN ♡</title>
-  <link rel="icon" href="https://i.ibb.co/hXZsYxZ/heart.png" />  <!-- META buat WhatsApp & Sosmed Preview -->  <meta property="og:title" content="Selamat Pagi ALYN ♡" />
-  <meta property="og:description" content="Ucapan manis untuk pagi harimu, ALYN 💗" />
-  <meta property="og:image" content="https://i.ibb.co/MRk4CGR/heart-pink.jpg" />
-  <meta property="og:url" content="https://dafjoyy.github.io/selamat-malam-untuk-riyan/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kalkulator Niken</title>
+  <style>
     body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(to bottom, #1e1e2f, #3a3a5c);
-      color: #fff;
+      background-color: #2e2e2e;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      overflow: hidden;
-      flex-direction: column;
-    }
-
-    h1 {
-      font-size: 2.5em;
+      height: 100vh;
       margin: 0;
     }
 
-    p {
-      font-size: 1.2em;
-      margin-top: 10px;
+    .calculator {
+      background-color: #3b3b3b;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 20px #00000088;
+      width: 320px;
     }
 
-    .love {
-      position: fixed;
-      top: -30px;
-      font-size: 40px;
-      color: #ff6699;
-      animation: fall 8s linear infinite;
-      pointer-events: none;
-      z-index: 0;
+    .display {
+      background-color: #1e1e1e;
+      color: #00ff99;
+      font-size: 28px;
+      text-align: right;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      height: 60px;
+      overflow-x: auto;
     }
 
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-      }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
     }
 
-    #playBtn {
-      background: #ff6699;
+    button {
+      background-color: #5c5c5c;
       color: white;
       border: none;
-      padding: 12px 20px;
-      border-radius: 20px;
-      font-size: 16px;
+      padding: 20px;
+      font-size: 20px;
+      border-radius: 10px;
       cursor: pointer;
-      margin-top: 20px;
+      transition: background-color 0.2s;
     }
-  </style></head>
+
+    button:hover {
+      background-color: #777;
+    }
+
+    button.operator {
+      background-color: #00b894;
+    }
+
+    button.equal {
+      background-color: #fd79a8;
+      grid-column: span 2;
+    }
+
+    button.clear {
+      background-color: #d63031;
+      grid-column: span 2;
+    }
+  </style>
+</head>
 <body>
-  <!-- Audio -->
-  <audio id="bgm" loop>
-    <source src="./about_you.mp3" type="audio/mpeg" />
-  </audio>  <!-- Konten -->  <div>
-    <h1>Selamat Pagi, ALYN ♡</h1>
-    <p>Semoga pagimu penuh senyum, kayak aku pas mikirin kamu 😄</p>
-    <p>Jangan lupa sarapan, biar kuat menghadapi dunia 🤍</p>
-    <button id="playBtn">Putar Musik 🎵</button>
-  </div>  <!-- Script love & audio -->  <script>
-    const audio = document.getElementById('bgm');
-    const playBtn = document.getElementById('playBtn');
-    let isPlaying = false;
 
-    function dropHearts() {
-      const heart = document.createElement('div');
-      heart.classList.add('love');
-      heart.innerText = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = Math.random() * 20 + 40 + 'px';
-      heart.style.animationDuration = (Math.random() * 2 + 5) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
+  <div class="calculator">
+    <div class="display" id="display"></div>
+    <div class="buttons">
+      <button onclick="addChar('7')">7</button>
+      <button onclick="addChar('8')">8</button>
+      <button onclick="addChar('9')">9</button>
+      <button class="operator" onclick="addChar('/')">÷</button>
+
+      <button onclick="addChar('4')">4</button>
+      <button onclick="addChar('5')">5</button>
+      <button onclick="addChar('6')">6</button>
+      <button class="operator" onclick="addChar('*')">×</button>
+
+      <button onclick="addChar('1')">1</button>
+      <button onclick="addChar('2')">2</button>
+      <button onclick="addChar('3')">3</button>
+      <button class="operator" onclick="addChar('-')">−</button>
+
+      <button onclick="addChar('0')">0</button>
+      <button onclick="addChar('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+      <button class="operator" onclick="addChar('+')">+</button>
+
+      <button class="clear" onclick="clearDisplay()">C</button>
+    </div>
+  </div>
+
+  <audio id="niken-music">
+    <source src="https://putishere.github.io/selamat-pagi-untuk-alyn/about-you.mp3" type="audio/mpeg">
+    Browser lu gak support audio.
+  </audio>
+
+  <script>
+    const display = document.getElementById('display');
+    const music = document.getElementById('niken-music');
+
+    function addChar(char) {
+      display.textContent += char;
     }
 
-    playBtn.addEventListener('click', () => {
-      if (!isPlaying) {
-        audio.volume = 0.5;
-        audio.play();
-        isPlaying = true;
-        playBtn.style.display = 'none';
-        setInterval(dropHearts, 250);
+    function clearDisplay() {
+      display.textContent = '';
+      music.pause();
+      music.currentTime = 0;
+    }
+
+    function containsOperator(expr) {
+      return /[+\-*/]/.test(expr);
+    }
+
+    function calculate() {
+      const expression = display.textContent;
+
+      if (containsOperator(expression)) {
+        try {
+          // Angka hasil disembunyikan, hanya muncul pesan
+          display.textContent = 'Selamat Pagi Niken 💐💝';
+          music.currentTime = 0;
+          music.play();
+        } catch (err) {
+          display.textContent = 'Error';
+        }
       }
-    });
-  </script></body>
+    }
+  </script>
+
+</body>
 </html>
