@@ -2,37 +2,52 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kalkulator Niken</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Buat Niken 💐</title>
   <style>
     body {
-      background-color: #2e2e2e;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #181818, #2c2c2c);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 10px 0 20px;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .calculator {
-      background-color: #3b3b3b;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 20px #00000088;
       width: 320px;
+      background: #333;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      padding: 20px;
     }
 
     .display {
-      background-color: #1e1e1e;
-      color: #00ff99;
-      font-size: 28px;
-      text-align: right;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      width: 100%;
       height: 60px;
-      overflow-x: auto;
+      background: #000;
+      color: #0f0;
+      font-size: 2rem;
+      text-align: right;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
     }
 
     .buttons {
@@ -41,103 +56,113 @@
       gap: 15px;
     }
 
-    button {
-      background-color: #5c5c5c;
+    .btn {
+      padding: 20px;
+      font-size: 1.2rem;
+      background: #222;
       color: white;
       border: none;
-      padding: 20px;
-      font-size: 20px;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: 0.2s;
     }
 
-    button:hover {
-      background-color: #777;
+    .btn:hover {
+      background: #444;
     }
 
-    button.operator {
-      background-color: #00b894;
+    .btn.operator {
+      background: #d35400;
     }
 
-    button.equal {
-      background-color: #fd79a8;
+    .btn.operator:hover {
+      background: #e67e22;
+    }
+
+    .btn.equal {
+      background: #27ae60;
       grid-column: span 2;
     }
 
-    button.clear {
-      background-color: #d63031;
-      grid-column: span 2;
+    .btn.equal:hover {
+      background: #2ecc71;
+    }
+
+    .btn.clear {
+      background: #c0392b;
+    }
+
+    .btn.clear:hover {
+      background: #e74c3c;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-
+  <h1>Selamat pagi Niken 💐💝</h1>
   <div class="calculator">
-    <div class="display" id="display"></div>
+    <div id="display" class="display">0</div>
     <div class="buttons">
-      <button onclick="addChar('7')">7</button>
-      <button onclick="addChar('8')">8</button>
-      <button onclick="addChar('9')">9</button>
-      <button class="operator" onclick="addChar('/')">÷</button>
+      <button class="btn" onclick="press('7')">7</button>
+      <button class="btn" onclick="press('8')">8</button>
+      <button class="btn" onclick="press('9')">9</button>
+      <button class="btn operator" onclick="press('/')">÷</button>
 
-      <button onclick="addChar('4')">4</button>
-      <button onclick="addChar('5')">5</button>
-      <button onclick="addChar('6')">6</button>
-      <button class="operator" onclick="addChar('*')">×</button>
+      <button class="btn" onclick="press('4')">4</button>
+      <button class="btn" onclick="press('5')">5</button>
+      <button class="btn" onclick="press('6')">6</button>
+      <button class="btn operator" onclick="press('*')">×</button>
 
-      <button onclick="addChar('1')">1</button>
-      <button onclick="addChar('2')">2</button>
-      <button onclick="addChar('3')">3</button>
-      <button class="operator" onclick="addChar('-')">−</button>
+      <button class="btn" onclick="press('1')">1</button>
+      <button class="btn" onclick="press('2')">2</button>
+      <button class="btn" onclick="press('3')">3</button>
+      <button class="btn operator" onclick="press('-')">−</button>
 
-      <button onclick="addChar('0')">0</button>
-      <button onclick="addChar('.')">.</button>
-      <button class="equal" onclick="calculate()">=</button>
-      <button class="operator" onclick="addChar('+')">+</button>
+      <button class="btn" onclick="press('0')">0</button>
+      <button class="btn" onclick="press('.')">.</button>
+      <button class="btn equal" onclick="calculate()">=</button>
+      <button class="btn operator" onclick="press('+')">+</button>
 
-      <button class="clear" onclick="clearDisplay()">C</button>
+      <button class="btn clear" onclick="clearDisplay()">C</button>
     </div>
   </div>
 
-  <audio id="niken-music">
-    <source src="https://putishere.github.io/selamat-pagi-untuk-alyn/about-you.mp3" type="audio/mpeg">
-    Browser lu gak support audio.
+  <audio autoplay loop hidden>
+    <source src="/.aboutyou.mp3" type="audio/mpeg" />
   </audio>
 
+  <footer>by someone who cares 💚</footer>
+
   <script>
-    const display = document.getElementById('display');
-    const music = document.getElementById('niken-music');
+    let current = '';
 
-    function addChar(char) {
-      display.textContent += char;
-    }
-
-    function clearDisplay() {
-      display.textContent = '';
-      music.pause();
-      music.currentTime = 0;
-    }
-
-    function containsOperator(expr) {
-      return /[+\-*/]/.test(expr);
+    function press(val) {
+      if (current === '0' && val !== '.') {
+        current = val;
+      } else {
+        current += val;
+      }
+      document.getElementById('display').textContent = current;
     }
 
     function calculate() {
-      const expression = display.textContent;
-
-      if (containsOperator(expression)) {
-        try {
-          // Angka hasil disembunyikan, hanya muncul pesan
-          display.textContent = 'Selamat Pagi Niken 💐💝';
-          music.currentTime = 0;
-          music.play();
-        } catch (err) {
-          display.textContent = 'Error';
-        }
+      try {
+        current = eval(current).toString();
+        document.getElementById('display').textContent = current;
+      } catch (err) {
+        document.getElementById('display').textContent = 'Error';
       }
     }
-  </script>
 
+    function clearDisplay() {
+      current = '';
+      document.getElementById('display').textContent = '0';
+    }
+  </script>
 </body>
 </html>
