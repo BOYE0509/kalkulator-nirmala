@@ -1,116 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>buat anomali</title>
-    <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        .calculator {
-            background-color: #000;
-            border-radius: 40px;
-            padding: 20px;
-            width: 300px;
-        }
-        .screen {
-            background-color: #333;
-            color: #fff;
-            font-size: 35px;
-            text-align: right;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            font-size: 24px;
-            padding: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        button.operator {
-            background-color: #ff9500;
-        }
-        button.equal {
-            background-color: #ff9500;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>buat anomali</title>
+  <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
+      font-family: 'Courier New', monospace;
+      color: white;
+      margin: 0;
+    }
+
+    .calculator {
+      background-color: #000;
+      border-radius: 30px;
+      padding: 20px;
+      width: 320px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    .screen {
+      background-color: #111;
+      color: #0f0;
+      font-size: 28px;
+      text-align: right;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      min-height: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    button {
+      background-color: #222;
+      color: #fff;
+      border: none;
+      font-size: 20px;
+      padding: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.1s ease, background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button.operator {
+      background-color: #ff9500;
+      color: black;
+    }
+
+    button.equal {
+      background-color: #0f0;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* Typewriter effect */
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .typewriter {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: .15em solid #0f0;
+      animation: typewriter 3s steps(25) 1 normal both;
+    }
+  </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="screen" id="screen">0</div>
-        <div class="buttons">
-            <button onclick="clearScreen()">C</button>
-            <button onclick="appendToScreen('+/-')">+/-</button>
-            <button onclick="appendToScreen('%')">%</button>
-            <button class="operator" onclick="appendToScreen('/')">/</button>
-            <button onclick="appendToScreen('7')">7</button>
-            <button onclick="appendToScreen('8')">8</button>
-            <button onclick="appendToScreen('9')">9</button>
-            <button class="operator" onclick="appendToScreen('*')">×</button>
-            <button onclick="appendToScreen('4')">4</button>
-            <button onclick="appendToScreen('5')">5</button>
-            <button onclick="appendToScreen('6')">6</button>
-            <button class="operator" onclick="appendToScreen('-')">-</button>
-            <button onclick="appendToScreen('1')">1</button>
-            <button onclick="appendToScreen('2')">2</button>
-            <button onclick="appendToScreen('3')">3</button>
-            <button class="operator" onclick="appendToScreen('+')">+</button>
-            <button onclick="appendToScreen('0')">0</button>
-            <button onclick="appendToScreen('.')">.</button>
-            <button class="equal" onclick="calculate()">=</button>
-        </div>
+  <div class="calculator">
+    <div class="screen" id="screen">0</div>
+    <div class="buttons">
+      <button onclick="clearScreen()">C</button>
+      <button onclick="appendToScreen('+/-')">+/-</button>
+      <button onclick="appendToScreen('%')">%</button>
+      <button class="operator" onclick="appendToScreen('/')">÷</button>
+      <button onclick="appendToScreen('7')">7</button>
+      <button onclick="appendToScreen('8')">8</button>
+      <button onclick="appendToScreen('9')">9</button>
+      <button class="operator" onclick="appendToScreen('*')">×</button>
+      <button onclick="appendToScreen('4')">4</button>
+      <button onclick="appendToScreen('5')">5</button>
+      <button onclick="appendToScreen('6')">6</button>
+      <button class="operator" onclick="appendToScreen('-')">−</button>
+      <button onclick="appendToScreen('1')">1</button>
+      <button onclick="appendToScreen('2')">2</button>
+      <button onclick="appendToScreen('3')">3</button>
+      <button class="operator" onclick="appendToScreen('+')">+</button>
+      <button onclick="appendToScreen('0')">0</button>
+      <button onclick="appendToScreen('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
     </div>
+  </div>
 
-    <!-- AUDIO -->
-    <audio id="audio-player">
-        <source src="aboutyou.mp3" type="audio/mpeg" />
-    </audio>
+  <!-- Audio -->
+  <audio id="resultAudio" src="https://putishere.github.io/Hallo-Someone/about_you.mp3"></audio>
 
-    <!-- SCRIPT -->
-    <script>
-        let screenValue = '0';
+  <script>
+    let screenValue = '0';
 
-        function updateScreen() {
-            document.getElementById('screen').innerText = screenValue;
-        }
+    function updateScreen() {
+      const screen = document.getElementById('screen');
+      screen.classList.remove("typewriter");
+      screen.innerText = screenValue;
+    }
 
-        function appendToScreen(value) {
-            if (screenValue === '0' && value !== '.') {
-                screenValue = value;
-            } else {
-                screenValue += value;
-            }
-            updateScreen();
-        }
+    function appendToScreen(value) {
+      if (screenValue === '0' && value !== '.') {
+        screenValue = value;
+      } else {
+        screenValue += value;
+      }
+      updateScreen();
+    }
 
-        function clearScreen() {
-            screenValue = '0';
-            updateScreen();
-        }
+    function clearScreen() {
+      screenValue = '0';
+      updateScreen();
+    }
 
-        function calculate() {
-            screenValue = 'good night someone';
-            updateScreen();
-            const audio = document.getElementById('audio-player');
-            audio.play();
-        }
-    </script>
+    function calculate() {
+      screenValue = "good night someone";
+
+      const screen = document.getElementById('screen');
+      screen.classList.add("typewriter");
+      screen.innerText = screenValue;
+
+      const audio = document.getElementById('resultAudio');
+      audio.currentTime = 0;
+      audio.play();
+    }
+  </script>
 </body>
 </html>
