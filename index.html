@@ -132,18 +132,18 @@
     </div>
   </div>
 
-  <!-- Musik -->
-  <audio autoplay loop hidden>
-    <source src="https://putishere.github.io/selamat-pagi-niken/aboutyou.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
-
   <footer>by someone who cares 💚</footer>
 
   <script>
     let current = '';
+    const audio = new Audio("https://putishere.github.io/selamat-pagi-niken/aboutyou.mp3");
+    audio.loop = true;
 
     function press(val) {
+      if (audio.paused) {
+        audio.play().catch(err => console.log("Autoplay blocked: ", err));
+      }
+
       if (current === '0' && val !== '.') {
         current = val;
       } else {
@@ -154,9 +154,8 @@
 
     function calculate() {
       try {
-        eval(current); // Hitung tapi gak ditampilkan
-        current = '';
-        document.getElementById('display').textContent = '0'; // Tetap 0
+        current = eval(current).toString();
+        document.getElementById('display').textContent = current;
       } catch (err) {
         document.getElementById('display').textContent = 'Error';
       }
