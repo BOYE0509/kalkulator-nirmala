@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>buat anomali</title>
     <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png">
     <style>
@@ -78,8 +78,8 @@
         </div>
     </div>
 
-    <!-- MUSIC -->
-    <audio autoplay loop>
+    <!-- AUDIO -->
+    <audio id="audio-player">
         <source src="aboutyou.mp3" type="audio/mpeg" />
     </audio>
 
@@ -106,8 +106,10 @@
         }
 
         function calculate() {
-            screenValue = 'good naight someone';
+            screenValue = 'good night someone';
             updateScreen();
+            const audio = document.getElementById('audio-player');
+            audio.play();
         }
     </script>
 </body>
