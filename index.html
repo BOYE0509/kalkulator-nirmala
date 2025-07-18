@@ -7,84 +7,81 @@
   <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png" />
   <style>
     body {
+      margin: 0;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
-      font-family: 'Courier New', monospace;
-      color: white;
-      margin: 0;
     }
-
     .calculator {
       background-color: #000;
-      border-radius: 30px;
+      border-radius: 40px;
       padding: 20px;
-      width: 320px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      width: 300px;
+      position: relative;
+      z-index: 10;
     }
-
     .screen {
-      background-color: #111;
-      color: #0f0;
+      background-color: #333;
+      color: #fff;
       font-size: 28px;
-      text-align: right;
-      padding: 15px;
-      margin-bottom: 15px;
+      text-align: center;
+      padding: 10px;
+      margin-bottom: 10px;
       border-radius: 10px;
-      min-height: 50px;
-      overflow: hidden;
       white-space: nowrap;
+      overflow: hidden;
     }
-
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
-
     button {
-      background-color: #222;
+      background-color: #333;
       color: #fff;
       border: none;
-      font-size: 20px;
-      padding: 18px;
+      font-size: 24px;
+      padding: 20px;
       border-radius: 50%;
       cursor: pointer;
-      transition: transform 0.1s ease, background 0.2s ease;
     }
-
-    button:hover {
-      background-color: #444;
-    }
-
-    button:active {
-      transform: scale(0.95);
-    }
-
-    button.operator {
-      background-color: #ff9500;
-      color: black;
-    }
-
+    button.operator,
     button.equal {
-      background-color: #0f0;
-      color: black;
-      font-weight: bold;
-    }
-
-    /* Typewriter effect */
-    @keyframes typewriter {
-      from { width: 0; }
-      to { width: 100%; }
+      background-color: #ff9500;
     }
 
     .typewriter {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: .15em solid #0f0;
-      animation: typewriter 3s steps(25) 1 normal both;
+      animation: typing 2s steps(40, end) 1;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    /* Bunga jatuh */
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -95,7 +92,7 @@
       <button onclick="clearScreen()">C</button>
       <button onclick="appendToScreen('+/-')">+/-</button>
       <button onclick="appendToScreen('%')">%</button>
-      <button class="operator" onclick="appendToScreen('/')">÷</button>
+      <button class="operator" onclick="appendToScreen('/')">/</button>
       <button onclick="appendToScreen('7')">7</button>
       <button onclick="appendToScreen('8')">8</button>
       <button onclick="appendToScreen('9')">9</button>
@@ -103,7 +100,7 @@
       <button onclick="appendToScreen('4')">4</button>
       <button onclick="appendToScreen('5')">5</button>
       <button onclick="appendToScreen('6')">6</button>
-      <button class="operator" onclick="appendToScreen('-')">−</button>
+      <button class="operator" onclick="appendToScreen('-')">-</button>
       <button onclick="appendToScreen('1')">1</button>
       <button onclick="appendToScreen('2')">2</button>
       <button onclick="appendToScreen('3')">3</button>
@@ -115,19 +112,21 @@
   </div>
 
   <!-- Audio -->
-  <audio id="resultAudio" src="https://putishere.github.io/Hallo-Someone/about_you.mp3"></audio>
+  <audio id="resultAudio" src="about_you.mp3"></audio>
 
+  <!-- Script -->
   <script>
-    let screenValue = '0';
+    let screenValue = "0";
 
     function updateScreen() {
-      const screen = document.getElementById('screen');
-      screen.classList.remove("typewriter");
+      const screen = document.getElementById("screen");
       screen.innerText = screenValue;
     }
 
     function appendToScreen(value) {
-      if (screenValue === '0' && value !== '.') {
+      const screen = document.getElementById("screen");
+      screen.classList.remove("typewriter");
+      if (screenValue === "0" && value !== ".") {
         screenValue = value;
       } else {
         screenValue += value;
@@ -136,20 +135,37 @@
     }
 
     function clearScreen() {
-      screenValue = '0';
+      screenValue = "0";
       updateScreen();
     }
 
     function calculate() {
-      screenValue = "good night someone";
-
-      const screen = document.getElementById('screen');
+      screenValue = "🌸 good night someone 🌸";
+      const screen = document.getElementById("screen");
       screen.classList.add("typewriter");
       screen.innerText = screenValue;
 
-      const audio = document.getElementById('resultAudio');
+      const audio = document.getElementById("resultAudio");
       audio.currentTime = 0;
       audio.play();
+
+      // generate flowers
+      for (let i = 0; i < 15; i++) {
+        createFlower();
+      }
+    }
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.style.left = Math.random() * 100 + "vw";
+      flower.style.animationDuration = 2 + Math.random() * 3 + "s";
+      flower.innerText = "🌸";
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 5000);
     }
   </script>
 </body>
