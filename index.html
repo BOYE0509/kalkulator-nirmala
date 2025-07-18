@@ -11,35 +11,40 @@
       height: 100vh;
       background-color: #f0f0f0;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: visible;
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
     .calculator {
       background-color: #000;
       border-radius: 40px;
       padding: 20px;
       width: 300px;
-      position: relative;
       z-index: 10;
     }
+
     .screen {
       background-color: #333;
       color: #fff;
       font-size: 28px;
       text-align: center;
-      padding: 10px;
+      padding: 20px;
       margin-bottom: 10px;
       border-radius: 10px;
       white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
+
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
     }
+
     button {
       background-color: #333;
       color: #fff;
@@ -49,21 +54,12 @@
       border-radius: 50%;
       cursor: pointer;
     }
+
     button.operator,
     button.equal {
       background-color: #ff9500;
     }
 
-    .typewriter {
-      animation: typing 2s steps(40, end) 1;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    /* Bunga jatuh */
     .flower {
       position: absolute;
       top: -50px;
@@ -111,22 +107,21 @@
     </div>
   </div>
 
-  <!-- Audio -->
-  <audio id="resultAudio" src="about_you.mp3"></audio>
+  <!-- AUDIO -->
+  <audio id="audio" autoplay loop>
+    <source src="about_you.mp3" type="audio/mpeg" />
+  </audio>
 
-  <!-- Script -->
+  <!-- SCRIPT -->
   <script>
-    let screenValue = "0";
+    let screenValue = '0';
 
     function updateScreen() {
-      const screen = document.getElementById("screen");
-      screen.innerText = screenValue;
+      document.getElementById('screen').innerText = screenValue;
     }
 
     function appendToScreen(value) {
-      const screen = document.getElementById("screen");
-      screen.classList.remove("typewriter");
-      if (screenValue === "0" && value !== ".") {
+      if (screenValue === '0' && value !== '.') {
         screenValue = value;
       } else {
         screenValue += value;
@@ -135,34 +130,29 @@
     }
 
     function clearScreen() {
-      screenValue = "0";
+      screenValue = '0';
       updateScreen();
     }
 
     function calculate() {
-      screenValue = "🌸 good night someone 🌸";
-      const screen = document.getElementById("screen");
-      screen.classList.add("typewriter");
-      screen.innerText = screenValue;
+      screenValue = 'good night someone';
+      updateScreen();
 
-      const audio = document.getElementById("resultAudio");
-      audio.currentTime = 0;
+      const audio = document.getElementById('audio');
       audio.play();
 
-      // generate flowers
       for (let i = 0; i < 15; i++) {
         createFlower();
       }
     }
 
     function createFlower() {
-      const flower = document.createElement("div");
-      flower.classList.add("flower");
-      flower.style.left = Math.random() * 100 + "vw";
-      flower.style.animationDuration = 2 + Math.random() * 3 + "s";
-      flower.innerText = "🌸";
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.animationDuration = 2 + Math.random() * 3 + 's';
+      flower.innerText = '🌸';
       document.body.appendChild(flower);
-
       setTimeout(() => {
         flower.remove();
       }, 5000);
