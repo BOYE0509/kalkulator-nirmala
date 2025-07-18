@@ -1,170 +1,114 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kalkulator Buat Niken 💐</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #181818, #2c2c2c);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      margin: 10px 0 20px;
-      animation: fadeInDown 1.5s ease;
-    }
-
-    @keyframes fadeInDown {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .calculator {
-      width: 320px;
-      background: #333;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      padding: 20px;
-    }
-
-    .display {
-      width: 100%;
-      height: 60px;
-      background: #000;
-      color: #0f0;
-      font-size: 2rem;
-      text-align: right;
-      border-radius: 10px;
-      padding: 10px;
-      margin-bottom: 20px;
-      box-sizing: border-box;
-    }
-
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-
-    .btn {
-      padding: 20px;
-      font-size: 1.2rem;
-      background: #222;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      background: #444;
-    }
-
-    .btn.operator {
-      background: #d35400;
-    }
-
-    .btn.operator:hover {
-      background: #e67e22;
-    }
-
-    .btn.equal {
-      background: #27ae60;
-      grid-column: span 2;
-    }
-
-    .btn.equal:hover {
-      background: #2ecc71;
-    }
-
-    .btn.clear {
-      background: #c0392b;
-    }
-
-    .btn.clear:hover {
-      background: #e74c3c;
-    }
-
-    footer {
-      margin-top: 30px;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buat anomali</title>
+    <link rel="icon" href="https://i.ibb.co.com/hXZsYxZ/heart.png">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            background-color: #000;
+            border-radius: 40px;
+            padding: 20px;
+            width: 300px;
+        }
+        .screen {
+            background-color: #333;
+            color: #fff;
+            font-size: 35px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            padding: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        button.operator {
+            background-color: #ff9500;
+        }
+        button.equal {
+            background-color: #ff9500;
+        }
+    </style>
 </head>
 <body>
-  <h1>Selamat pagi Niken 💐💝</h1>
-  <div class="calculator">
-    <div id="display" class="display">0</div>
-    <div class="buttons">
-      <button class="btn" onclick="press('7')">7</button>
-      <button class="btn" onclick="press('8')">8</button>
-      <button class="btn" onclick="press('9')">9</button>
-      <button class="btn operator" onclick="press('/')">÷</button>
-
-      <button class="btn" onclick="press('4')">4</button>
-      <button class="btn" onclick="press('5')">5</button>
-      <button class="btn" onclick="press('6')">6</button>
-      <button class="btn operator" onclick="press('*')">×</button>
-
-      <button class="btn" onclick="press('1')">1</button>
-      <button class="btn" onclick="press('2')">2</button>
-      <button class="btn" onclick="press('3')">3</button>
-      <button class="btn operator" onclick="press('-')">−</button>
-
-      <button class="btn" onclick="press('0')">0</button>
-      <button class="btn" onclick="press('.')">.</button>
-      <button class="btn equal" onclick="calculate()">=</button>
-      <button class="btn operator" onclick="press('+')">+</button>
-
-      <button class="btn clear" onclick="clearDisplay()">C</button>
+    <div class="calculator">
+        <div class="screen" id="screen">0</div>
+        <div class="buttons">
+            <button onclick="clearScreen()">C</button>
+            <button onclick="appendToScreen('+/-')">+/-</button>
+            <button onclick="appendToScreen('%')">%</button>
+            <button class="operator" onclick="appendToScreen('/')">/</button>
+            <button onclick="appendToScreen('7')">7</button>
+            <button onclick="appendToScreen('8')">8</button>
+            <button onclick="appendToScreen('9')">9</button>
+            <button class="operator" onclick="appendToScreen('*')">×</button>
+            <button onclick="appendToScreen('4')">4</button>
+            <button onclick="appendToScreen('5')">5</button>
+            <button onclick="appendToScreen('6')">6</button>
+            <button class="operator" onclick="appendToScreen('-')">-</button>
+            <button onclick="appendToScreen('1')">1</button>
+            <button onclick="appendToScreen('2')">2</button>
+            <button onclick="appendToScreen('3')">3</button>
+            <button class="operator" onclick="appendToScreen('+')">+</button>
+            <button onclick="appendToScreen('0')">0</button>
+            <button onclick="appendToScreen('.')">.</button>
+            <button class="equal" onclick="calculate()">=</button>
+        </div>
     </div>
-  </div>
 
-  <footer>by someone who cares 💚</footer>
+    <!-- MUSIC -->
+    <audio autoplay loop>
+        <source src="aboutyou.mp3" type="audio/mpeg" />
+    </audio>
 
-  <script>
-    let current = '';
-    const audio = new Audio("https://putishere.github.io/selamat-pagi-niken/aboutyou.mp3");
-    audio.loop = true;
+    <!-- SCRIPT -->
+    <script>
+        let screenValue = '0';
 
-    function press(val) {
-      if (audio.paused) {
-        audio.play().catch(err => console.log("Autoplay blocked: ", err));
-      }
+        function updateScreen() {
+            document.getElementById('screen').innerText = screenValue;
+        }
 
-      if (current === '0' && val !== '.') {
-        current = val;
-      } else {
-        current += val;
-      }
-      document.getElementById('display').textContent = current;
-    }
+        function appendToScreen(value) {
+            if (screenValue === '0' && value !== '.') {
+                screenValue = value;
+            } else {
+                screenValue += value;
+            }
+            updateScreen();
+        }
 
-    function calculate() {
-      try {
-        current = eval(current).toString();
-        document.getElementById('display').textContent = current;
-      } catch (err) {
-        document.getElementById('display').textContent = 'Error';
-      }
-    }
+        function clearScreen() {
+            screenValue = '0';
+            updateScreen();
+        }
 
-    function clearDisplay() {
-      current = '';
-      document.getElementById('display').textContent = '0';
-    }
-  </script>
+        function calculate() {
+            screenValue = 'good naight someone';
+            updateScreen();
+        }
+    </script>
 </body>
 </html>
