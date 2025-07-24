@@ -39,6 +39,7 @@
       color: #333;
       line-height: 1.6;
       margin: 1rem 0;
+      animation: slideUp 2s ease;
     }
 
     .btn {
@@ -59,12 +60,13 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .fade {
-      animation: fadeIn 2s ease forwards;
-    }
-
-    .hidden {
+    .thanks, #endMessage {
       display: none;
+      animation: fadeIn 2s ease-in;
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 1.5rem;
+      font-style: italic;
     }
 
     @keyframes fadeIn {
@@ -76,57 +78,53 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    audio {
+      visibility: hidden;
+      height: 0;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>GOOD NIGHT ASTREA 💐</h2>
-    <p id="apology">
+    <p>
       Saya, Tri Saputra, ingin meminta<br>
       maaf sebesar-besarnya<br>
       kepada Astrea karena tidak sengaja<br>
       merusak mood-nya.
     </p>
-
     <button class="btn" onclick="showThanks()">Aku maafin</button>
-
-    <p id="thanksText" class="hidden fade">
+    <p class="thanks" id="thanksText">
       Thank you, Astrea. I hope you keep that beautiful smile with you.
     </p>
-
-    <p id="endMessage" class="hidden fade">
-      🌙 Lagunya sudah selesai. Semoga malam ini jadi lebih tenang, Astrea.
-    </p>
+    <p id="endMessage">🌙 Lagunya sudah selesai. Semoga malam ini jadi lebih tenang, Astrea.</p>
   </div>
 
-  <audio id="bgMusic" autoplay playsinline>
-    <source src="about_you.mp3" type="audio/mpeg" />
+  <audio id="bgMusic" autoplay loop>
+    <source src="./about_you.mp3" type="audio/mpeg" />
     Browser kamu tidak mendukung audio tag ini.
   </audio>
 
   <script>
     const audio = document.getElementById("bgMusic");
 
-    // Tampilkan teks saat tombol diklik
-    function showThanks() {
-      document.body.style.background = "linear-gradient(to bottom, #f8d0e0, #fce4ec)";
-      const thanksText = document.getElementById("thanksText");
-      thanksText.classList.remove("hidden");
-      thanksText.classList.add("fade");
+    document.addEventListener('click', () => {
+      if (audio.paused) audio.play();
+    });
 
+    function showThanks() {
+      document.getElementById("thanksText").style.display = "block";
+      document.body.style.background = "linear-gradient(to bottom, #ffc0cb, #ffe6ec)";
       setTimeout(() => {
-        const endMsg = document.getElementById("endMessage");
-        endMsg.classList.remove("hidden");
-        endMsg.classList.add("fade");
+        document.getElementById("endMessage").style.display = "block";
       }, 10000);
     }
-
-    // Coba play ulang kalau autoplay diblok
-    document.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play();
-      }
-    });
   </script>
 </body>
 </html>
