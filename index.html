@@ -39,13 +39,6 @@
       font-size: 1.6rem;
     }
 
-    p {
-      color: #444;
-      line-height: 1.6;
-      margin: 1rem 0;
-      font-size: 1.1rem;
-    }
-
     .btn {
       background-color: #b33951;
       color: white;
@@ -64,12 +57,18 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .hiddenText {
+    .textBox {
+      background-color: rgba(255, 240, 245, 0.8);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 12px;
       display: none;
       opacity: 0;
-      color: #5c2a38;
-      font-style: italic;
       animation: slideUp 1.5s ease-in-out forwards;
+    }
+
+    .textBox.show {
+      display: block;
     }
 
     @keyframes fadeIn {
@@ -87,6 +86,11 @@
       100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
     }
 
+    @keyframes snow-fall {
+      0% { transform: translateY(-10vh); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0.3; }
+    }
+
     .confetti {
       position: fixed;
       width: 10px;
@@ -94,6 +98,17 @@
       background: red;
       animation: confetti-fall 3s linear forwards;
       opacity: 0;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1.2rem;
+      opacity: 0.8;
+      animation: snow-fall linear forwards;
+      pointer-events: none;
+      z-index: 1;
     }
 
     audio {
@@ -104,14 +119,24 @@
 <body>
   <div class="card">
     <h2>GOOD MORNING ASTREA 💐💝</h2>
-    <p>
-      Saya, Tri Saputra, ingin meminta<br>
-      maaf sebesar-besarnya kepada Astrea<br>
-      karena tidak sengaja merusak mood-nya.
-    </p>
+
+    <div id="text1" class="textBox">
+      <p>
+        Saya, Tri Saputra, ingin meminta<br>
+        maaf sebesar-besarnya kepada Astrea<br>
+        karena tidak sengaja merusak mood-nya.
+      </p>
+    </div>
+
     <button class="btn" onclick="showResponse()">Aku maafin</button>
-    <p id="response" class="hiddenText">Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
-    <p id="thirdText" class="hiddenText">BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭</p>
+
+    <div id="text2" class="textBox">
+      <p>Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
+    </div>
+
+    <div id="text3" class="textBox">
+      <p>BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭</p>
+    </div>
   </div>
 
   <audio id="bgMusic" autoplay loop>
@@ -120,30 +145,38 @@
   </audio>
 
   <script>
-    const response = document.getElementById('response');
-    const thirdText = document.getElementById('thirdText');
     const audio = document.getElementById('bgMusic');
+    const text1 = document.getElementById('text1');
+    const text2 = document.getElementById('text2');
+    const text3 = document.getElementById('text3');
     let clicked = false;
 
     function showResponse() {
       if (clicked) return;
       clicked = true;
 
-      audio.play().catch(() => {}); // Autoplay fallback
+      audio.play().catch(() => {});
 
-      response.style.display = 'block';
-      setTimeout(() => response.style.opacity = 1, 50);
+      text1.classList.add('show');
+      setTimeout(() => text1.style.opacity = 1, 100);
 
       setTimeout(() => {
-        thirdText.style.display = 'block';
-        setTimeout(() => thirdText.style.opacity = 1, 50);
+        text2.classList.add('show');
+        setTimeout(() => text2.style.opacity = 1, 100);
+      }, 4000);
+
+      setTimeout(() => {
+        text3.classList.add('show');
+        setTimeout(() => text3.style.opacity = 1, 100);
       }, 8000);
 
-      launchConfetti();
+      const duration = (audio.duration || 30) * 1000;
+      launchLoopedConfetti(duration);
+      launchLoopedSnow(duration);
     }
 
     function launchConfetti() {
-      for (let i = 0; i < 80; i++) {
+      for (let i = 0; i < 30; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         confetti.style.left = Math.random() * 100 + "vw";
@@ -153,6 +186,29 @@
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 5000);
       }
+    }
+
+    function launchSnow() {
+      for (let i = 0; i < 15; i++) {
+        const snow = document.createElement('div');
+        snow.classList.add('snowflake');
+        snow.innerHTML = "❄";
+        snow.style.left = Math.random() * 100 + "vw";
+        snow.style.fontSize = (Math.random() * 10 + 10) + "px";
+        snow.style.animationDuration = (5 + Math.random() * 5) + "s";
+        document.body.appendChild(snow);
+        setTimeout(() => snow.remove(), 10000);
+      }
+    }
+
+    function launchLoopedConfetti(duration) {
+      const interval = setInterval(() => launchConfetti(), 1500);
+      setTimeout(() => clearInterval(interval), duration);
+    }
+
+    function launchLoopedSnow(duration) {
+      const interval = setInterval(() => launchSnow(), 1000);
+      setTimeout(() => clearInterval(interval), duration);
     }
 
     function randomColor() {
