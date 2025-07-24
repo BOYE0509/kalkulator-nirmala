@@ -1,74 +1,133 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Permintaan Maaf</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Astrea 💐</title>
   <style>
     body {
-      background-color: pink;
       font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffd6e8, #ffe4f2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
       text-align: center;
-      padding: 100px 20px;
+      transition: background 1s ease;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      max-width: 420px;
+      animation: fadeIn 2s ease;
+    }
+
+    h2 {
+      color: #d63384;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      animation: slideDown 2s ease;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+      margin: 1rem 0;
+      animation: slideUp 2s ease;
+    }
+
+    .btn {
+      background-color: #d63384;
       color: white;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 30px;
-      animation: slideIn 2s ease-in-out;
-    }
-
-    #extraText {
-      margin-top: 30px;
-      font-size: 24px;
-      display: none;
-      opacity: 0;
-      animation: fadeInText 3s ease-in-out forwards;
-    }
-
-    button {
-      background-color: white;
-      color: hotpink;
       border: none;
-      padding: 15px 30px;
-      font-size: 18px;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
     }
 
-    button:hover {
-      transform: scale(1.1);
+    .btn:hover {
+      background-color: #ad2c6b;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .thanks, #endMessage {
+      display: none;
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 1.5rem;
+      font-style: italic;
+      animation: fadeIn 2s ease-in;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeInText {
+    @keyframes slideUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    audio {
+      visibility: hidden;
+      height: 0;
     }
   </style>
 </head>
 <body>
-  <h1>Maaf ya, aku bener-bener nyesel...</h1>
+  <div class="card">
+    <h2>GOOD NIGHT ASTREA 💐</h2>
+    <p id="mainText">
+      Saya, Tri Saputra, ingin meminta<br>
+      maaf sebesar-besarnya<br>
+      kepada Astrea karena tidak sengaja<br>
+      merusak mood-nya.
+    </p>
+    <button class="btn" onclick="showThanks()">Aku maafin</button>
+    <p class="thanks" id="thanksText">
+      Thank you, Astrea. I hope you keep that beautiful smile with you.
+    </p>
+    <p id="endMessage">🌙 Lagunya sudah selesai. Semoga malam ini jadi lebih tenang, Astrea.</p>
+  </div>
 
-  <button onclick="showText()">Aku sungguh minta maaf</button>
-
-  <div id="extraText">Aku harap kamu bisa maafin aku, walau semua ini mungkin susah. Aku cuma pengen semuanya kembali seperti dulu, tanpa jarak, tanpa rasa sakit. Aku janji belajar jadi lebih baik...</div>
-
-  <audio id="bgm" src="about_you.mp3"></audio>
+  <audio id="bgMusic" autoplay loop playsinline>
+    <source src="about_you.mp3" type="audio/mpeg" />
+    Browser kamu tidak mendukung audio tag ini.
+  </audio>
 
   <script>
-    let shown = false;
+    const audio = document.getElementById("bgMusic");
+    const thanksText = document.getElementById("thanksText");
+    const endMessage = document.getElementById("endMessage");
 
-    function showText() {
+    function showThanks() {
+      thanksText.style.display = "block";
+      setTimeout(() => {
+        endMessage.style.display = "block";
+      }, 10000); // Tampil 10 detik setelah teks kedua
+    }
+
+    document.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      }
+    });
+  </script>
+</body>
+</html>
