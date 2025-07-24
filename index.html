@@ -66,7 +66,8 @@
 
     #response {
       display: none;
-      animation: slideUp 1.5s ease-in-out;
+      opacity: 0;
+      animation: slideUp 1.5s ease-in-out forwards;
       font-style: italic;
       color: #5c2a38;
     }
@@ -102,7 +103,7 @@
 </head>
 <body>
   <div class="card">
-    <h2>FOR ASTREA 💐</h2>
+    <h2>GOOD NIGHT ASTREA 💐</h2>
     <p>
       Saya, Tri Saputra, ingin meminta<br>
       maaf sebesar-besarnya<br>
@@ -110,7 +111,7 @@
       merusak mood-nya.
     </p>
     <button class="btn" onclick="showResponse()">Aku maafin</button>
-    <p id="response">Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
+    <p id="response">Lagunya masih lama, semoga malam ini jadi lebih tenang, Astrea.</p>
   </div>
 
   <audio id="bgMusic" autoplay loop>
@@ -122,7 +123,10 @@
     const response = document.getElementById('response');
 
     function showResponse() {
-      response.style.display = 'block';
+      setTimeout(() => {
+        response.style.display = 'block';
+        response.style.animation = 'slideUp 1.5s ease-in-out forwards';
+      }, 10000); // delay 10 detik
       launchConfetti();
     }
 
