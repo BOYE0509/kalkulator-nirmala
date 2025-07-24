@@ -98,6 +98,7 @@
       background: red;
       animation: confetti-fall 3s linear forwards;
       opacity: 0;
+      z-index: 1000;
     }
 
     .snowflake {
@@ -108,7 +109,7 @@
       opacity: 0.8;
       animation: snow-fall linear forwards;
       pointer-events: none;
-      z-index: 1;
+      z-index: 999;
     }
 
     audio {
@@ -170,9 +171,20 @@
         setTimeout(() => text3.style.opacity = 1, 100);
       }, 8000);
 
-      const duration = (audio.duration || 30) * 1000;
-      launchLoopedConfetti(duration);
-      launchLoopedSnow(duration);
+      audio.onloadedmetadata = () => {
+        const duration = audio.duration * 1000;
+        launchLoopedConfetti(duration);
+        launchLoopedSnow(duration);
+      };
+
+      // fallback duration if metadata gak bisa kebaca
+      setTimeout(() => {
+        if (isNaN(audio.duration)) {
+          const fallback = 30000;
+          launchLoopedConfetti(fallback);
+          launchLoopedSnow(fallback);
+        }
+      }, 1000);
     }
 
     function launchConfetti() {
