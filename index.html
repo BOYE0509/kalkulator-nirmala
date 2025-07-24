@@ -1,90 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FOR ASTREA 💐💝</title>
+  <title>For Astrea 💐</title>
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: pink;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
+      background: linear-gradient(135deg, #ffc0cb, #ffe6ec);
+      animation: bgPulse 8s ease-in-out infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       overflow: hidden;
+      text-align: center;
     }
-    #container {
-      padding-top: 25vh;
+
+    @keyframes bgPulse {
+      0%, 100% { background-color: #ffc0cb; }
+      50% { background-color: #ffd6df; }
     }
-    .hidden {
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      max-width: 500px;
+      animation: fadeIn 2s ease;
+    }
+
+    h2 {
+      color: #b33951;
+      margin-bottom: 1.2rem;
+      font-size: 1.6rem;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      background-color: #b33951;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    .btn:hover {
+      background-color: #90263d;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .hiddenText {
       display: none;
+      opacity: 0;
+      color: #5c2a38;
+      font-style: italic;
+      animation: slideUp 1.5s ease-in-out forwards;
     }
-    .fadeIn {
-      animation: fadeIn 2s forwards;
-    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
     .confetti {
-      position: absolute;
+      position: fixed;
       width: 10px;
       height: 10px;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation-name: fall;
-      animation-timing-function: linear;
+      background: red;
+      animation: confetti-fall 3s linear forwards;
+      opacity: 0;
     }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-      }
+
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <audio id="bgMusic" loop>
-    <source src="about_you.mp3" type="audio/mpeg" />
-  </audio>
-
-  <div id="container">
-    <button id="startBtn">Tap to Start</button>
-    <div id="text1" class="hidden">GOOD MORNING ASTREA 💐💝</div>
-    <div id="text2" class="hidden">Saya, TRI SAPUTRA, INGIN MEMINTA MAAF YANG SEBESAR-BESARNYA KEPADA ASTREA, KARENA TELAH MERUSAK MOODNYA</div>
-    <div id="text3" class="hidden">Btw pagi ini indah, Tapi tak seindah senyumanmu 🌤️😊
-    anjay kiw kiw🤭</div>
+  <div class="card">
+    <h2>GOOD MORNING ASTREA 💐💝</h2>
+    <p>
+      Saya, Tri Saputra, ingin meminta<br>
+      maaf sebesar-besarnya kepada Astrea<br>
+      karena tidak sengaja merusak mood-nya.
+    </p>
+    <button class="btn" onclick="showResponse()">Aku maafin</button>
+    <p id="response" class="hiddenText">Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
+    <p id="thirdText" class="hiddenText">BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🌤️😊<br>ANJAY KIW KIW 🤭</p>
   </div>
 
+  <audio id="bgMusic" autoplay loop>
+    <source src="about_you.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
   <script>
-    const btn = document.getElementById("startBtn");
-    const music = document.getElementById("bgMusic");
+    const response = document.getElementById('response');
+    const thirdText = document.getElementById('thirdText');
+    const audio = document.getElementById('bgMusic');
+    let clicked = false;
 
-    btn.addEventListener("click", () => {
-      btn.style.display = "none";
-      music.play();
-      showTextAndConfetti();
-    });
+    function showResponse() {
+      if (clicked) return;
+      clicked = true;
 
-    function showTextAndConfetti() {
-      const text1 = document.getElementById("text1");
-      const text2 = document.getElementById("text2");
-      const text3 = document.getElementById("text3");
+      audio.play().catch(() => {}); // Autoplay fallback
 
-      setTimeout(() => {
-        text1.classList.remove("hidden");
-        text1.classList.add("fadeIn");
-      }, 1000);
+      response.style.display = 'block';
+      setTimeout(() => response.style.opacity = 1, 50);
 
       setTimeout(() => {
-        text2.classList.remove("hidden");
-        text2.classList.add("fadeIn");
-      }, 3000);
-
-      setTimeout(() => {
-        text3.classList.remove("hidden");
-        text3.classList.add("fadeIn");
-      }, 10000);
+        thirdText.style.display = 'block';
+        setTimeout(() => thirdText.style.opacity = 1, 50);
+      }, 8000);
 
       launchConfetti();
     }
