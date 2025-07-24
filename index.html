@@ -1,213 +1,201 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FOR ASTREA 💐💝</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
-      overflow-x: hidden;
-    }.card {
-  text-align: center;
-  padding: 50px 20px;
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: linear-gradient(135deg, #f0f4f8, #e1eff6);
+      overflow: hidden;
+    }
 
-h2 {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.5em;
-  margin-bottom: 20px;
-  color: #6a0572;
-}
+    #title {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      color: #d6336c;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
 
-.text-block {
-  margin: 20px auto;
-  max-width: 500px;
-  padding: 30px;
-  border-radius: 20px;
-  color: white;
-  font-size: 1.3em;
-  opacity: 0;
-  display: none;
-  transition: transform 0.8s, opacity 0.8s;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  transform: rotateX(90deg);
-}
+    #title div {
+      margin: 2px;
+    }
 
-#text1 {
-  background: radial-gradient(circle at top left, #ff6f91, #ff3d6f);
-}
-#text2 {
-  background: radial-gradient(circle at top left, #ff9671, #ff7a59);
-}
-#text3 {
-  background: radial-gradient(circle at top left, #ffc75f, #f9a602);
-  color: #000;
-}
+    .text-block {
+      display: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      margin: 10px auto;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 15px;
+      animation: fadeIn3D 1s ease forwards;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-.btn {
-  padding: 12px 25px;
-  font-size: 16px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 8px;
-  background: #845ec2;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    #text1 { background-color: #ffdde1; } /* soft pink */
+    #text2 { background-color: #d0f4de; } /* soft mint */
+    #text3 { background-color: #cfe9ff; } /* soft blue */
 
-.btn:hover {
-  background: #6a5acd;
-}
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff99c8;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-.confetti, .snowflake {
-  position: fixed;
-  top: -10px;
-  z-index: 9999;
-  pointer-events: none;
-}
+    .btn:hover {
+      transform: scale(1.1);
+    }
 
-.confetti {
-  border-radius: 50%;
-  animation: fallConfetti linear forwards;
-}
+    @keyframes fadeIn3D {
+      0% { opacity: 0; transform: rotateX(90deg) scale(0.8); }
+      100% { opacity: 1; transform: rotateX(0) scale(1); }
+    }
 
-.snowflake {
-  background: white;
-  border-radius: 50%;
-  animation: fallSnow linear forwards;
-}
+    .falling {
+      position: fixed;
+      top: -10px;
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: 999;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
 
-@keyframes fallConfetti {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100vh); }
-}
-
-@keyframes fallSnow {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
-}
-
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>GOOD MORNING ASTREA 💐💝</h2><div id="text1" class="text-block">
-  Saya, Tri Saputra, ingin meminta<br>
-  maaf sebesar-besarnya kepada Astrea karena tidak sengaja merusak mood-nya.
-</div>
 
-<div id="text2" class="text-block">
-  Thank you, Astrea. I hope you keep that beautiful smile with you.
-</div>
+  <div id="title">
+    <div>GOOD MORNING</div>
+    <div>ASTREA</div>
+    <div>💐💝</div>
+  </div>
 
-<div id="text3" class="text-block">
-  BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭
-</div>
+  <div id="text1" class="text-block">
+    Saya, Tri Saputra, ingin meminta<br>maaf sebesar-besarnya kepada Astrea karena tidak sengaja merusak mood-nya.
+  </div>
 
-<button class="btn" id="startBtn" onclick="startEffect()">Klik Me</button>
-<button class="btn" id="forgiveBtn" onclick="showText2()" style="display: none;">Aku Maafin</button>
-<button class="btn" id="nextBtn" onclick="showText3()" style="display: none;">Next</button>
+  <div id="text2" class="text-block">
+    Thank you Astrea. Semangat PMSnya😭😭😭😭😭
+  </div>
 
-  </div><audio id="bgMusic" src="about_you.mp3"></audio>
+  <div id="text3" class="text-block">
+    BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭<br><br>
+    <button class="btn" onclick="goBack()">Back</button>
+  </div>
+
+  <button class="btn" id="startBtn" onclick="startSequence()">Klik Me</button>
+  <button class="btn" id="forgiveBtn" onclick="showText2()" style="display: none;">Aku Maafin</button>
+  <button class="btn" id="nextBtn" onclick="showText3()" style="display: none;">Next</button>
+
+  <audio id="bgMusic" src="https://cdn.pixabay.com/audio/2023/03/08/audio_b1f27fdcec.mp3"></audio>
 
   <script>
-    const text1 = document.getElementById('text1');
-    const text2 = document.getElementById('text2');
-    const text3 = document.getElementById('text3');
-    const startBtn = document.getElementById('startBtn');
-    const forgiveBtn = document.getElementById('forgiveBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const audio = document.getElementById('bgMusic');
+    const music = document.getElementById('bgMusic');
 
-    function startEffect() {
-      startBtn.style.display = 'none';
+    function startSequence() {
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('text1').style.display = 'block';
+      document.getElementById('forgiveBtn').style.display = 'inline-block';
+      music.play();
+      startEffects();
 
-      audio.play().catch(() => {});
-      showBlock(text1);
-      forgiveBtn.style.display = 'inline-block';
-      setTimeout(() => forgiveBtn.style.opacity = 1, 100);
-
-      audio.onloadedmetadata = () => {
-        const dur = audio.duration * 1000;
-        launchLoopedConfetti(dur);
-        launchLoopedSnow(dur);
-      };
-
-      setTimeout(() => {
-        if (isNaN(audio.duration)) {
-          launchLoopedConfetti(30000);
-          launchLoopedSnow(30000);
-        }
-      }, 1000);
+      music.addEventListener("ended", stopEffects);
     }
 
     function showText2() {
-      hideBlock(text1);
-      forgiveBtn.style.display = 'none';
-      showBlock(text2);
-      nextBtn.style.display = 'inline-block';
-      setTimeout(() => nextBtn.style.opacity = 1, 100);
+      document.getElementById('forgiveBtn').style.display = 'none';
+      document.getElementById('text1').style.display = 'none';
+      document.getElementById('text2').style.display = 'block';
+      document.getElementById('nextBtn').style.display = 'inline-block';
+      spawnCat('🐱‍👓');
     }
 
     function showText3() {
-      hideBlock(text2);
-      nextBtn.style.display = 'none';
-      showBlock(text3);
+      document.getElementById('nextBtn').style.display = 'none';
+      document.getElementById('text2').style.display = 'none';
+      document.getElementById('text3').style.display = 'block';
+      spawnCat('🐱‍🚀');
     }
 
-    function showBlock(el) {
-      el.style.display = 'block';
+    function goBack() {
+      music.pause();
+      music.currentTime = 0;
+      stopEffects();
+      location.reload(); // reset semua
+    }
+
+    function spawnCat(icon) {
+      const cat = document.createElement('div');
+      cat.innerText = icon;
+      cat.style.position = 'fixed';
+      cat.style.top = Math.random() * window.innerHeight + 'px';
+      cat.style.left = Math.random() * window.innerWidth + 'px';
+      cat.style.fontSize = '40px';
+      cat.style.zIndex = 1000;
+      cat.style.transition = 'transform 3s ease-out, opacity 3s ease-out';
+      document.body.appendChild(cat);
+
       setTimeout(() => {
-        el.style.opacity = 1;
-        el.style.transform = 'rotateX(0deg)';
-      }, 50);
+        cat.style.transform = 'translateY(-100px) scale(1.5)';
+        cat.style.opacity = 0;
+      }, 100);
+
+      setTimeout(() => {
+        cat.remove();
+      }, 3000);
     }
 
-    function hideBlock(el) {
-      el.style.opacity = 0;
-      el.style.transform = 'rotateX(90deg)';
-      setTimeout(() => el.style.display = 'none', 500);
+    let effectsInterval;
+
+    function startEffects() {
+      effectsInterval = setInterval(() => {
+        createFalling('❄️', 4);  // snowflake
+        createFalling('🌸', 2);  // flowers
+      }, 500);
     }
 
-    function launchLoopedConfetti(duration) {
-      const iv = setInterval(() => launchConfetti(), 150);
-      setTimeout(() => clearInterval(iv), duration);
+    function stopEffects() {
+      clearInterval(effectsInterval);
+      document.querySelectorAll('.falling').forEach(e => e.remove());
     }
 
-    function launchLoopedSnow(duration) {
-      const iv = setInterval(() => launchSnow(), 200);
-      setTimeout(() => clearInterval(iv), duration);
+    function createFalling(symbol, count) {
+      for (let i = 0; i < count; i++) {
+        let item = document.createElement("div");
+        item.className = "falling";
+        item.textContent = symbol;
+        item.style.left = Math.random() * window.innerWidth + "px";
+        item.style.fontSize = (Math.random() * 20 + 10) + "px";
+        item.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(item);
+        setTimeout(() => item.remove(), 5000);
+      }
     }
-
-    function launchConfetti() {
-      const el = document.createElement('div');
-      el.className = 'confetti';
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.width = el.style.height = '10px';
-      el.style.backgroundColor = randomColor();
-      el.style.animationDuration = 2 + Math.random() * 3 + 's';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 5000);
-    }
-
-    function launchSnow() {
-      const el = document.createElement('div');
-      el.className = 'snowflake';
-      const size = 5 + Math.random() * 10;
-      el.style.width = el.style.height = size + 'px';
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.animationDuration = 5 + Math.random() * 5 + 's';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 12000);
-    }
-
-    function randomColor() {
-      return ['#ff99ac', '#ffcccb', '#f6c1d4', '#e75480', '#ffe4e1'][Math.floor(Math.random() * 5)];
-    }
-  </script></body>
+  </script>
+</body>
 </html>
