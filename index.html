@@ -1,195 +1,213 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FOR ASTREA 💐💝</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #ffc0cb, #ffe6ec);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      text-align: center;
-    }
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      overflow-x: hidden;
+    }.card {
+  text-align: center;
+  padding: 50px 20px;
+}
 
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      max-width: 500px;
-      animation: fadeIn 2s ease;
-    }
+h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #6a0572;
+}
 
-    h2 {
-      background: #ffeef1;
-      padding: 1rem;
-      border-radius: 12px;
-      color: #b33951;
-      margin-bottom: 1.2rem;
-      font-size: 1.6rem;
-    }
+.text-block {
+  margin: 20px auto;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 20px;
+  color: white;
+  font-size: 1.3em;
+  opacity: 0;
+  display: none;
+  transition: transform 0.8s, opacity 0.8s;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform: rotateX(90deg);
+}
 
-    p {
-      background: #f9e2e7;
-      color: #444;
-      line-height: 1.6;
-      margin: 1rem 0;
-      font-size: 1.1rem;
-      padding: 1rem;
-      border-radius: 10px;
-    }
+#text1 {
+  background: radial-gradient(circle at top left, #ff6f91, #ff3d6f);
+}
+#text2 {
+  background: radial-gradient(circle at top left, #ff9671, #ff7a59);
+}
+#text3 {
+  background: radial-gradient(circle at top left, #ffc75f, #f9a602);
+  color: #000;
+}
 
-    .btn {
-      background-color: #b33951;
-      color: white;
-      border: none;
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 1.5rem;
-    }
+.btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #845ec2;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    .btn:hover {
-      background-color: #90263d;
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
+.btn:hover {
+  background: #6a5acd;
+}
 
-    .hiddenText {
-      display: none;
-      opacity: 0;
-      font-style: italic;
-      animation: slideUp 1.5s ease-in-out forwards;
-    }
+.confetti, .snowflake {
+  position: fixed;
+  top: -10px;
+  z-index: 9999;
+  pointer-events: none;
+}
 
-    .confetti, .snowflake {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      z-index: 999;
-    }
+.confetti {
+  border-radius: 50%;
+  animation: fallConfetti linear forwards;
+}
 
-    .confetti {
-      animation: confetti-fall linear forwards;
-    }
+.snowflake {
+  background: white;
+  border-radius: 50%;
+  animation: fallSnow linear forwards;
+}
 
-    @keyframes confetti-fall {
-      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-    }
+@keyframes fallConfetti {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
 
-    .snowflake {
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: snowFall linear forwards;
-    }
+@keyframes fallSnow {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
 
-    @keyframes snowFall {
-      0% { transform: translateY(-10vh); }
-      100% { transform: translateY(110vh); }
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    audio {
-      display: none;
-    }
   </style>
 </head>
 <body>
   <div class="card">
-    <h2>GOOD MORNING ASTREA 💐💝</h2>
-    <p>
-      Saya, Tri Saputra, ingin meminta<br>
-      maaf sebesar-besarnya kepada Astrea<br>
-      karena tidak sengaja merusak mood-nya.
-    </p>
-    <button class="btn" onclick="startEffect()">Aku maafin</button>
-    <p id="response" class="hiddenText">Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
-    <p id="thirdText" class="hiddenText">BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭</p>
-  </div>
+    <h2>GOOD MORNING ASTREA 💐💝</h2><div id="text1" class="text-block">
+  Saya, Tri Saputra, ingin meminta<br>
+  maaf sebesar-besarnya kepada Astrea karena tidak sengaja merusak mood-nya.
+</div>
 
-  <audio id="bgMusic" autoplay loop>
-    <source src="about_you.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung audio.
-  </audio>
+<div id="text2" class="text-block">
+  Thank you, Astrea. I hope you keep that beautiful smile with you.
+</div>
+
+<div id="text3" class="text-block">
+  BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭
+</div>
+
+<button class="btn" id="startBtn" onclick="startEffect()">Klik Me</button>
+<button class="btn" id="forgiveBtn" onclick="showText2()" style="display: none;">Aku Maafin</button>
+<button class="btn" id="nextBtn" onclick="showText3()" style="display: none;">Next</button>
+
+  </div><audio id="bgMusic" src="about_you.mp3"></audio>
 
   <script>
-    const response = document.getElementById('response');
-    const thirdText = document.getElementById('thirdText');
+    const text1 = document.getElementById('text1');
+    const text2 = document.getElementById('text2');
+    const text3 = document.getElementById('text3');
+    const startBtn = document.getElementById('startBtn');
+    const forgiveBtn = document.getElementById('forgiveBtn');
+    const nextBtn = document.getElementById('nextBtn');
     const audio = document.getElementById('bgMusic');
-    let clicked = false;
 
     function startEffect() {
-      if (clicked) return;
-      clicked = true;
+      startBtn.style.display = 'none';
 
       audio.play().catch(() => {});
-      response.style.display = 'block';
-      setTimeout(() => response.style.opacity = 1, 50);
+      showBlock(text1);
+      forgiveBtn.style.display = 'inline-block';
+      setTimeout(() => forgiveBtn.style.opacity = 1, 100);
+
+      audio.onloadedmetadata = () => {
+        const dur = audio.duration * 1000;
+        launchLoopedConfetti(dur);
+        launchLoopedSnow(dur);
+      };
 
       setTimeout(() => {
-        thirdText.style.display = 'block';
-        setTimeout(() => thirdText.style.opacity = 1, 50);
-      }, 8000);
-
-      const duration = audio.duration * 1000 || 30000; // fallback 30s
-      launchConfetti(duration);
-      launchSnow(duration);
+        if (isNaN(audio.duration)) {
+          launchLoopedConfetti(30000);
+          launchLoopedSnow(30000);
+        }
+      }, 1000);
     }
 
-    function launchConfetti(duration) {
-      const interval = setInterval(() => {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-10px";
-        confetti.style.backgroundColor = randomColor();
-        confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 5000);
-      }, 150);
-
-      setTimeout(() => clearInterval(interval), duration);
+    function showText2() {
+      hideBlock(text1);
+      forgiveBtn.style.display = 'none';
+      showBlock(text2);
+      nextBtn.style.display = 'inline-block';
+      setTimeout(() => nextBtn.style.opacity = 1, 100);
     }
 
-    function launchSnow(duration) {
-      const interval = setInterval(() => {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
-        snowflake.style.left = Math.random() * 100 + "vw";
-        snowflake.style.top = "-10px";
-        snowflake.style.width = snowflake.style.height = 5 + Math.random() * 10 + "px";
-        snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
-        document.body.appendChild(snowflake);
-        setTimeout(() => snowflake.remove(), 12000);
-      }, 100);
+    function showText3() {
+      hideBlock(text2);
+      nextBtn.style.display = 'none';
+      showBlock(text3);
+    }
 
-      setTimeout(() => clearInterval(interval), duration);
+    function showBlock(el) {
+      el.style.display = 'block';
+      setTimeout(() => {
+        el.style.opacity = 1;
+        el.style.transform = 'rotateX(0deg)';
+      }, 50);
+    }
+
+    function hideBlock(el) {
+      el.style.opacity = 0;
+      el.style.transform = 'rotateX(90deg)';
+      setTimeout(() => el.style.display = 'none', 500);
+    }
+
+    function launchLoopedConfetti(duration) {
+      const iv = setInterval(() => launchConfetti(), 150);
+      setTimeout(() => clearInterval(iv), duration);
+    }
+
+    function launchLoopedSnow(duration) {
+      const iv = setInterval(() => launchSnow(), 200);
+      setTimeout(() => clearInterval(iv), duration);
+    }
+
+    function launchConfetti() {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.width = el.style.height = '10px';
+      el.style.backgroundColor = randomColor();
+      el.style.animationDuration = 2 + Math.random() * 3 + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5000);
+    }
+
+    function launchSnow() {
+      const el = document.createElement('div');
+      el.className = 'snowflake';
+      const size = 5 + Math.random() * 10;
+      el.style.width = el.style.height = size + 'px';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = 5 + Math.random() * 5 + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 12000);
     }
 
     function randomColor() {
-      const colors = ["#ff99ac", "#ffcccb", "#f6c1d4", "#e75480", "#ffe4e1"];
-      return colors[Math.floor(Math.random() * colors.length)];
+      return ['#ff99ac', '#ffcccb', '#f6c1d4', '#e75480', '#ffe4e1'][Math.floor(Math.random() * 5)];
     }
-  </script>
-</body>
+  </script></body>
 </html>
