@@ -10,18 +10,12 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(135deg, #ffc0cb, #ffe6ec);
-      animation: bgPulse 8s ease-in-out infinite;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       overflow: hidden;
       text-align: center;
-    }
-
-    @keyframes bgPulse {
-      0%, 100% { background-color: #ffc0cb; }
-      50% { background-color: #ffd6df; }
     }
 
     .card {
@@ -34,9 +28,22 @@
     }
 
     h2 {
+      background: #ffeef1;
+      padding: 1rem;
+      border-radius: 12px;
       color: #b33951;
       margin-bottom: 1.2rem;
       font-size: 1.6rem;
+    }
+
+    p {
+      background: #f9e2e7;
+      color: #444;
+      line-height: 1.6;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-radius: 10px;
     }
 
     .btn {
@@ -57,28 +64,22 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .textBox {
-      background-color: rgba(255, 240, 245, 0.8);
-      padding: 1rem;
-      margin-top: 1rem;
-      border-radius: 12px;
+    .hiddenText {
       display: none;
       opacity: 0;
+      font-style: italic;
       animation: slideUp 1.5s ease-in-out forwards;
     }
 
-    .textBox.show {
-      display: block;
+    .confetti, .snowflake {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      z-index: 999;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    .confetti {
+      animation: confetti-fall linear forwards;
     }
 
     @keyframes confetti-fall {
@@ -86,30 +87,26 @@
       100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
     }
 
-    @keyframes snow-fall {
-      0% { transform: translateY(-10vh); opacity: 1; }
-      100% { transform: translateY(110vh); opacity: 0.3; }
-    }
-
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: red;
-      animation: confetti-fall 3s linear forwards;
-      opacity: 0;
-      z-index: 1000;
-    }
-
     .snowflake {
-      position: fixed;
-      top: -10px;
-      color: white;
-      font-size: 1.2rem;
+      background: white;
+      border-radius: 50%;
       opacity: 0.8;
-      animation: snow-fall linear forwards;
-      pointer-events: none;
-      z-index: 999;
+      animation: snowFall linear forwards;
+    }
+
+    @keyframes snowFall {
+      0% { transform: translateY(-10vh); }
+      100% { transform: translateY(110vh); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     audio {
@@ -120,24 +117,14 @@
 <body>
   <div class="card">
     <h2>GOOD MORNING ASTREA 💐💝</h2>
-
-    <div id="text1" class="textBox">
-      <p>
-        Saya, Tri Saputra, ingin meminta<br>
-        maaf sebesar-besarnya kepada Astrea<br>
-        karena tidak sengaja merusak mood-nya.
-      </p>
-    </div>
-
-    <button class="btn" onclick="showResponse()">Aku maafin</button>
-
-    <div id="text2" class="textBox">
-      <p>Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
-    </div>
-
-    <div id="text3" class="textBox">
-      <p>BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭</p>
-    </div>
+    <p>
+      Saya, Tri Saputra, ingin meminta<br>
+      maaf sebesar-besarnya kepada Astrea<br>
+      karena tidak sengaja merusak mood-nya.
+    </p>
+    <button class="btn" onclick="startEffect()">Aku maafin</button>
+    <p id="response" class="hiddenText">Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
+    <p id="thirdText" class="hiddenText">BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭</p>
   </div>
 
   <audio id="bgMusic" autoplay loop>
@@ -146,49 +133,31 @@
   </audio>
 
   <script>
+    const response = document.getElementById('response');
+    const thirdText = document.getElementById('thirdText');
     const audio = document.getElementById('bgMusic');
-    const text1 = document.getElementById('text1');
-    const text2 = document.getElementById('text2');
-    const text3 = document.getElementById('text3');
     let clicked = false;
 
-    function showResponse() {
+    function startEffect() {
       if (clicked) return;
       clicked = true;
 
       audio.play().catch(() => {});
-
-      text1.classList.add('show');
-      setTimeout(() => text1.style.opacity = 1, 100);
-
-      setTimeout(() => {
-        text2.classList.add('show');
-        setTimeout(() => text2.style.opacity = 1, 100);
-      }, 4000);
+      response.style.display = 'block';
+      setTimeout(() => response.style.opacity = 1, 50);
 
       setTimeout(() => {
-        text3.classList.add('show');
-        setTimeout(() => text3.style.opacity = 1, 100);
+        thirdText.style.display = 'block';
+        setTimeout(() => thirdText.style.opacity = 1, 50);
       }, 8000);
 
-      audio.onloadedmetadata = () => {
-        const duration = audio.duration * 1000;
-        launchLoopedConfetti(duration);
-        launchLoopedSnow(duration);
-      };
-
-      // fallback duration if metadata gak bisa kebaca
-      setTimeout(() => {
-        if (isNaN(audio.duration)) {
-          const fallback = 30000;
-          launchLoopedConfetti(fallback);
-          launchLoopedSnow(fallback);
-        }
-      }, 1000);
+      const duration = audio.duration * 1000 || 30000; // fallback 30s
+      launchConfetti(duration);
+      launchSnow(duration);
     }
 
-    function launchConfetti() {
-      for (let i = 0; i < 30; i++) {
+    function launchConfetti(duration) {
+      const interval = setInterval(() => {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
         confetti.style.left = Math.random() * 100 + "vw";
@@ -197,29 +166,23 @@
         confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 5000);
-      }
-    }
+      }, 150);
 
-    function launchSnow() {
-      for (let i = 0; i < 15; i++) {
-        const snow = document.createElement('div');
-        snow.classList.add('snowflake');
-        snow.innerHTML = "❄";
-        snow.style.left = Math.random() * 100 + "vw";
-        snow.style.fontSize = (Math.random() * 10 + 10) + "px";
-        snow.style.animationDuration = (5 + Math.random() * 5) + "s";
-        document.body.appendChild(snow);
-        setTimeout(() => snow.remove(), 10000);
-      }
-    }
-
-    function launchLoopedConfetti(duration) {
-      const interval = setInterval(() => launchConfetti(), 1500);
       setTimeout(() => clearInterval(interval), duration);
     }
 
-    function launchLoopedSnow(duration) {
-      const interval = setInterval(() => launchSnow(), 1000);
+    function launchSnow(duration) {
+      const interval = setInterval(() => {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.style.left = Math.random() * 100 + "vw";
+        snowflake.style.top = "-10px";
+        snowflake.style.width = snowflake.style.height = 5 + Math.random() * 10 + "px";
+        snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
+        document.body.appendChild(snowflake);
+        setTimeout(() => snowflake.remove(), 12000);
+      }, 100);
+
       setTimeout(() => clearInterval(interval), duration);
     }
 
