@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FOR ASTREA</title>
+  <title>For Astrea 💐</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -64,12 +64,12 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
-    #response {
+    #response, #thirdText {
       display: none;
       opacity: 0;
-      animation: slideUp 1.5s ease-in-out forwards;
       font-style: italic;
       color: #5c2a38;
+      animation: slideUp 1.5s ease-in-out forwards;
     }
 
     @keyframes fadeIn {
@@ -103,7 +103,7 @@
 </head>
 <body>
   <div class="card">
-    <h2>GOOD NIGHT ASTREA 💐💝</h2>
+    <h2>GOOD MORNING ASTREA 💐💝</h2>
     <p>
       Saya, Tri Saputra, ingin meminta<br>
       maaf sebesar-besarnya<br>
@@ -111,7 +111,8 @@
       merusak mood-nya.
     </p>
     <button class="btn" onclick="showResponse()">Aku maafin</button>
-    <p id="response">Lagunya masih lama, semoga malam ini jadi lebih tenang, Astrea.</p>
+    <p id="response">Thank you, Astrea. I hope you keep that beautiful smile with you.</p>
+    <p id="thirdText">Lagunya masih lama, semoga malam ini jadi lebih tenang, Astrea.</p>
   </div>
 
   <audio id="bgMusic" autoplay loop>
@@ -121,12 +122,26 @@
 
   <script>
     const response = document.getElementById('response');
+    const thirdText = document.getElementById('thirdText');
+    const audio = document.getElementById('bgMusic');
+    let clicked = false;
 
     function showResponse() {
+      if (clicked) return;
+      clicked = true;
+
+      // paksa play ulang kalau autoplay gagal
+      audio.play().catch(() => {});
+
+      response.style.display = 'block';
+      response.style.animation = 'slideUp 1.5s ease-in-out forwards';
+
+      // tampilkan teks ketiga setelah 10 detik
       setTimeout(() => {
-        response.style.display = 'block';
-        response.style.animation = 'slideUp 1.5s ease-in-out forwards';
-      }, 10000); // 10 detik delay
+        thirdText.style.display = 'block';
+        thirdText.style.animation = 'slideUp 1.5s ease-in-out forwards';
+      }, 10000);
+
       launchConfetti();
     }
 
