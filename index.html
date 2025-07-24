@@ -46,9 +46,9 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    #text1 { background-color: #ffdde1; } /* soft pink */
-    #text2 { background-color: #d0f4de; } /* soft mint */
-    #text3 { background-color: #cfe9ff; } /* soft blue */
+    #text1 { background-color: #ffdde1; }
+    #text2 { background-color: #d0f4de; }
+    #text3 { background-color: #cfe9ff; }
 
     .btn {
       padding: 10px 20px;
@@ -112,7 +112,8 @@
   <button class="btn" id="forgiveBtn" onclick="showText2()" style="display: none;">Aku Maafin</button>
   <button class="btn" id="nextBtn" onclick="showText3()" style="display: none;">Next</button>
 
-  <audio id="bgMusic" src="https://cdn.pixabay.com/audio/2023/03/08/audio_b1f27fdcec.mp3"></audio>
+  <!-- Ganti src di bawah sesuai path audio lo -->
+  <audio id="bgMusic" src="https://putishere.github.io/Hii-Astrea-/bg.mp3"></audio>
 
   <script>
     const music = document.getElementById('bgMusic');
@@ -123,7 +124,6 @@
       document.getElementById('forgiveBtn').style.display = 'inline-block';
       music.play();
       startEffects();
-
       music.addEventListener("ended", stopEffects);
     }
 
@@ -146,7 +146,7 @@
       music.pause();
       music.currentTime = 0;
       stopEffects();
-      location.reload(); // reset semua
+      location.reload();
     }
 
     function spawnCat(icon) {
@@ -174,9 +174,9 @@
 
     function startEffects() {
       effectsInterval = setInterval(() => {
-        createFalling('❄️', 4);  // snowflake
-        createFalling('🌸', 2);  // flowers
-      }, 500);
+        createFalling('❄️', 3);  // moderate snow
+        createFalling('🌸', 2);  // moderate flowers
+      }, 700);
     }
 
     function stopEffects() {
