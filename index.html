@@ -9,7 +9,7 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom right, #ffd6e8, #ffe4f2);
+      background: linear-gradient(to bottom, #fdfbfb, #dbe9f4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,7 +20,7 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       padding: 2.5rem;
       border-radius: 20px;
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
@@ -29,21 +29,20 @@
     }
 
     h2 {
-      color: #d63384;
+      color: #3c4fac;
       margin-bottom: 1rem;
       letter-spacing: 1px;
       animation: slideDown 2s ease;
     }
 
     p {
-      color: #444;
+      color: #333;
       line-height: 1.6;
       margin: 1rem 0;
-      animation: slideUp 2s ease;
     }
 
     .btn {
-      background-color: #d63384;
+      background-color: #3c4fac;
       color: white;
       border: none;
       padding: 0.75rem 2rem;
@@ -55,18 +54,17 @@
     }
 
     .btn:hover {
-      background-color: #ad2c6b;
+      background-color: #2c3d8e;
       transform: scale(1.05);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
-    .thanks, #endMessage {
+    .fade {
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .hidden {
       display: none;
-      font-size: 0.95rem;
-      color: #555;
-      margin-top: 1.5rem;
-      font-style: italic;
-      animation: fadeIn 2s ease-in;
     }
 
     @keyframes fadeIn {
@@ -78,52 +76,53 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    audio {
-      visibility: hidden;
-      height: 0;
-    }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>GOOD NIGHT ASTREA 💐</h2>
-    <p id="mainText">
+    <p id="apology">
       Saya, Tri Saputra, ingin meminta<br>
       maaf sebesar-besarnya<br>
       kepada Astrea karena tidak sengaja<br>
       merusak mood-nya.
     </p>
+
     <button class="btn" onclick="showThanks()">Aku maafin</button>
-    <p class="thanks" id="thanksText">
+
+    <p id="thanksText" class="hidden fade">
       Thank you, Astrea. I hope you keep that beautiful smile with you.
     </p>
-    <p id="endMessage">🌙 Lagunya sudah selesai. Semoga malam ini jadi lebih tenang, Astrea.</p>
+
+    <p id="endMessage" class="hidden fade">
+      🌙 Lagunya sudah selesai. Semoga malam ini jadi lebih tenang, Astrea.
+    </p>
   </div>
 
-  <audio id="bgMusic" autoplay loop playsinline>
+  <audio id="bgMusic" autoplay playsinline>
     <source src="about_you.mp3" type="audio/mpeg" />
     Browser kamu tidak mendukung audio tag ini.
   </audio>
 
   <script>
     const audio = document.getElementById("bgMusic");
-    const thanksText = document.getElementById("thanksText");
-    const endMessage = document.getElementById("endMessage");
 
+    // Tampilkan teks saat tombol diklik
     function showThanks() {
-      thanksText.style.display = "block";
+      document.body.style.background = "linear-gradient(to bottom, #f8d0e0, #fce4ec)";
+      const thanksText = document.getElementById("thanksText");
+      thanksText.classList.remove("hidden");
+      thanksText.classList.add("fade");
+
       setTimeout(() => {
-        endMessage.style.display = "block";
-      }, 10000); // Tampil 10 detik setelah teks kedua
+        const endMsg = document.getElementById("endMessage");
+        endMsg.classList.remove("hidden");
+        endMsg.classList.add("fade");
+      }, 10000);
     }
 
-    document.addEventListener('click', () => {
+    // Coba play ulang kalau autoplay diblok
+    document.addEventListener("click", () => {
       if (audio.paused) {
         audio.play();
       }
