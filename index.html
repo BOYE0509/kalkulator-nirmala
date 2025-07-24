@@ -112,8 +112,7 @@
   <button class="btn" id="forgiveBtn" onclick="showText2()" style="display: none;">Aku Maafin</button>
   <button class="btn" id="nextBtn" onclick="showText3()" style="display: none;">Next</button>
 
-  <!-- Ganti src di bawah sesuai path audio lo -->
-  <audio id="bgMusic" src="https://putishere.github.io/Hii-Astrea-/bg.mp3"></audio>
+  <audio id="bgMusic" src="about_you audio.mp3"></audio> <!-- Ganti sesuai nama file audio yang lo upload -->
 
   <script>
     const music = document.getElementById('bgMusic');
@@ -124,6 +123,7 @@
       document.getElementById('forgiveBtn').style.display = 'inline-block';
       music.play();
       startEffects();
+
       music.addEventListener("ended", stopEffects);
     }
 
@@ -174,9 +174,9 @@
 
     function startEffects() {
       effectsInterval = setInterval(() => {
-        createFalling('❄️', 3);  // moderate snow
-        createFalling('🌸', 2);  // moderate flowers
-      }, 700);
+        createFalling('❄️', 4);
+        createFalling('🌸', 2);
+      }, 500);
     }
 
     function stopEffects() {
