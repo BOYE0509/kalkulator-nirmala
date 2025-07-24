@@ -3,93 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Good Morning Astrea</title>
+  <title>FOR ASTREA 💐💝</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap');
-
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
       font-family: 'Quicksand', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background: linear-gradient(135deg, #f0f4f8, #e1eff6);
       overflow: hidden;
+    }
+
+    #title {
       text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      color: #d6336c;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    #title div {
+      margin: 2px;
     }
 
     .text-block {
       display: none;
-      margin: 20px auto;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
       padding: 20px;
+      margin: 10px auto;
       width: 80%;
-      font-size: 1.4rem;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 12px;
-      backdrop-filter: blur(5px);
-      animation: fadeIn3D 1s ease-in-out forwards;
+      max-width: 500px;
+      border-radius: 15px;
+      animation: fadeIn3D 1s ease forwards;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    #text1 {
-      background-color: #f8cdda;
-    }
-
-    #text2 {
-      background-color: #c2ffd8;
-    }
-
-    #text3 {
-      background-color: #d1d1ff;
-    }
-
-    #title {
-      font-family: 'Pacifico', cursive;
-      font-size: 2rem;
-      margin-top: 50px;
-      white-space: pre-line;
-      color: #fff;
-    }
+    #text1 { background-color: #ffdde1; }
+    #text2 { background-color: #d0f4de; }
+    #text3 { background-color: #cfe9ff; }
 
     .btn {
       padding: 10px 20px;
+      margin: 10px;
       font-size: 1rem;
       border: none;
-      border-radius: 20px;
-      background: #fff;
-      margin: 10px;
+      border-radius: 10px;
+      background-color: #ff99c8;
+      color: white;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .btn:hover {
-      background: #f1f1f1;
+      transform: scale(1.1);
     }
 
     @keyframes fadeIn3D {
-      0% {
-        transform: rotateY(90deg);
-        opacity: 0;
-      }
-      100% {
-        transform: rotateY(0deg);
-        opacity: 1;
-      }
+      0% { opacity: 0; transform: rotateX(90deg) scale(0.8); }
+      100% { opacity: 1; transform: rotateX(0) scale(1); }
     }
 
-    canvas {
+    .falling {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: -10px;
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: 999;
+      animation: fall linear infinite;
       pointer-events: none;
-      z-index: -1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
     }
   </style>
 </head>
 <body>
-  <div id="title">Good morning<br>Astrea<br>💐💝</div>
+
+  <div id="title">
+    <div>GOOD MORNING</div>
+    <div>ASTREA</div>
+    <div>💐💝</div>
+  </div>
 
   <div id="text1" class="text-block">
-    Saya, Tri Saputra, ingin meminta<br>
-    maaf sebesar-besarnya kepada Astrea<br>
-    karena tidak sengaja merusak mood-nya.
+    Saya, Tri Saputra, ingin meminta<br>maaf sebesar-besarnya kepada Astrea karena tidak sengaja merusak mood-nya.
   </div>
 
   <div id="text2" class="text-block">
@@ -97,130 +104,94 @@
   </div>
 
   <div id="text3" class="text-block">
-    BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭
-    <br><br>
-    <button class="btn" onclick="resetToStart()">Back</button>
+    BTW PAGI INI INDAH, TAPI TAK SEINDAH SENYUMANMU 🐊🐊🐊<br>ANJAY KIW KIW 🤭<br><br>
+    <button class="btn" onclick="goBack()">Back</button>
   </div>
 
-  <button class="btn" id="startBtn" onclick="startEffect()">Klik Me</button>
+  <button class="btn" id="startBtn" onclick="startSequence()">Klik Me</button>
   <button class="btn" id="forgiveBtn" onclick="showText2()" style="display: none;">Aku Maafin</button>
   <button class="btn" id="nextBtn" onclick="showText3()" style="display: none;">Next</button>
 
   <audio id="bgMusic" src="about_you.mp3"></audio>
 
-  <canvas id="snow"></canvas>
-  <canvas id="flower"></canvas>
-
   <script>
-    const bgMusic = document.getElementById('bgMusic');
+    const music = document.getElementById('bgMusic');
 
-    function startEffect() {
-      document.getElementById('text1').style.display = 'block';
+    function startSequence() {
       document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('text1').style.display = 'block';
       document.getElementById('forgiveBtn').style.display = 'inline-block';
-      bgMusic.currentTime = 0;
-      bgMusic.play();
-      startSnow();
-      startFlower();
+      music.play();
+      startEffects();
+      music.addEventListener("ended", stopEffects);
     }
 
     function showText2() {
+      document.getElementById('forgiveBtn').style.display = 'none';
       document.getElementById('text1').style.display = 'none';
       document.getElementById('text2').style.display = 'block';
-      document.getElementById('forgiveBtn').style.display = 'none';
       document.getElementById('nextBtn').style.display = 'inline-block';
+      spawnCat('🐱‍👓');
     }
 
     function showText3() {
+      document.getElementById('nextBtn').style.display = 'none';
       document.getElementById('text2').style.display = 'none';
       document.getElementById('text3').style.display = 'block';
-      document.getElementById('nextBtn').style.display = 'none';
+      spawnCat('🐱‍🚀');
     }
 
-    function resetToStart() {
-      document.getElementById('text3').style.display = 'none';
-      document.getElementById('startBtn').style.display = 'inline-block';
-      document.getElementById('text1').style.display = 'none';
-      document.getElementById('text2').style.display = 'none';
-      bgMusic.pause();
-      bgMusic.currentTime = 0;
-      stopSnow();
-      stopFlower();
+    function goBack() {
+      music.pause();
+      music.currentTime = 0;
+      stopEffects();
+      location.reload();
     }
 
-    // SNOW EFFECT
-    let snowCtx, snowCanvas, snowflakes = [], snowInterval;
-    function startSnow() {
-      snowCanvas = document.getElementById('snow');
-      snowCtx = snowCanvas.getContext('2d');
-      snowCanvas.width = window.innerWidth;
-      snowCanvas.height = window.innerHeight;
-      snowflakes = Array.from({ length: 60 }, () => createSnowflake());
-      snowInterval = setInterval(drawSnow, 33);
+    function spawnCat(icon) {
+      const cat = document.createElement('div');
+      cat.innerText = icon;
+      cat.style.position = 'fixed';
+      cat.style.top = Math.random() * window.innerHeight + 'px';
+      cat.style.left = Math.random() * window.innerWidth + 'px';
+      cat.style.fontSize = '40px';
+      cat.style.zIndex = 1000;
+      cat.style.transition = 'transform 3s ease-out, opacity 3s ease-out';
+      document.body.appendChild(cat);
+      setTimeout(() => {
+        cat.style.transform = 'translateY(-100px) scale(1.5)';
+        cat.style.opacity = 0;
+      }, 100);
+      setTimeout(() => {
+        cat.remove();
+      }, 3000);
     }
 
-    function stopSnow() {
-      clearInterval(snowInterval);
-      snowflakes = [];
-      snowCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+    let effectsInterval;
+
+    function startEffects() {
+      effectsInterval = setInterval(() => {
+        createFalling('❄️', 4);
+        createFalling('🌸', 2);
+      }, 500);
     }
 
-    function createSnowflake() {
-      return {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * -window.innerHeight,
-        radius: Math.random() * 3 + 1,
-        speedY: Math.random() * 2 + 1
-      };
+    function stopEffects() {
+      clearInterval(effectsInterval);
+      document.querySelectorAll('.falling').forEach(e => e.remove());
     }
 
-    function drawSnow() {
-      snowCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-      snowflakes.forEach(flake => {
-        flake.y += flake.speedY;
-        if (flake.y > window.innerHeight) flake.y = 0;
-        snowCtx.beginPath();
-        snowCtx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-        snowCtx.fillStyle = '#fff';
-        snowCtx.fill();
-      });
-    }
-
-    // FLOWER EFFECT
-    let flowerCtx, flowerCanvas, flowers = [], flowerInterval;
-    function startFlower() {
-      flowerCanvas = document.getElementById('flower');
-      flowerCtx = flowerCanvas.getContext('2d');
-      flowerCanvas.width = window.innerWidth;
-      flowerCanvas.height = window.innerHeight;
-      flowers = Array.from({ length: 40 }, () => createFlower());
-      flowerInterval = setInterval(drawFlower, 33);
-    }
-
-    function stopFlower() {
-      clearInterval(flowerInterval);
-      flowers = [];
-      flowerCtx.clearRect(0, 0, flowerCanvas.width, flowerCanvas.height);
-    }
-
-    function createFlower() {
-      const emojis = ['🌸', '🌼', '🌺', '🌷'];
-      return {
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * -window.innerHeight,
-        emoji: emojis[Math.floor(Math.random() * emojis.length)],
-        speedY: Math.random() * 1.5 + 0.5
-      };
-    }
-
-    function drawFlower() {
-      flowerCtx.clearRect(0, 0, flowerCanvas.width, flowerCanvas.height);
-      flowerCtx.font = '24px serif';
-      flowers.forEach(f => {
-        flowerCtx.fillText(f.emoji, f.x, f.y);
-        f.y += f.speedY;
-        if (f.y > window.innerHeight) f.y = 0;
-      });
+    function createFalling(symbol, count) {
+      for (let i = 0; i < count; i++) {
+        let item = document.createElement("div");
+        item.className = "falling";
+        item.textContent = symbol;
+        item.style.left = Math.random() * window.innerWidth + "px";
+        item.style.fontSize = (Math.random() * 20 + 10) + "px";
+        item.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(item);
+        setTimeout(() => item.remove(), 5000);
+      }
     }
   </script>
 </body>
